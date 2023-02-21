@@ -13,6 +13,7 @@ import '../pages/home.dart';
 import '../pages/household_overview.dart';
 import '../pages/language_selection.dart';
 import '../pages/login.dart';
+import '../pages/my_checklist.dart';
 import '../pages/project_selection.dart';
 import '../pages/search_beneficiary.dart';
 import '../pages/unauthenticated.dart';
@@ -59,6 +60,7 @@ part 'app_router.gr.dart';
         ),
         AutoRoute(page: AcknowledgementPage, path: 'acknowledgement'),
         AutoRoute(page: ProjectSelectionPage, path: 'project-selection'),
+        AutoRoute(page: MyChecklistPage, path: 'my-checklist'),
       ],
     ),
   ],

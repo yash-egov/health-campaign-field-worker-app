@@ -55,6 +55,7 @@ class Home {
   const Home();
 
   String get beneficiaryLabel => 'HOME_BENEFICIARY_LABEL';
+  String get checklistLabel => 'MY_CHECKLIST_LABEL';
 
   String get viewReportsLabel => 'HOME_VIEW_REPORTS_LABEL';
 
