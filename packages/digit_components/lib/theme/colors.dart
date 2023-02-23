@@ -25,4 +25,7 @@ class DigitColors {
   Color get darkOrchid => const Color(0xFF8E29BF);
   Color get mangoOrange => const Color(0xFFEA8A3B);
   Color get pacificBlue => const Color(0xFF0BABDE);
+  Color get warningSurfaceColor => const Color(0xFFFFE2B5);
+  Color get warningIconColor => const Color(0xFFCC7B2F);
+
 }

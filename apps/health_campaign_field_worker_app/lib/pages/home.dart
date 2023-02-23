@@ -74,7 +74,7 @@ class _HomePageState extends LocalizedState<HomePage> {
       HomeItemCard(
         icon: Icons.fact_check,
         label: i18.home.checklistLabel,
-        onPressed: () => context.router.push(const MyChecklistRoute()),
+        onPressed: () => context.router.push(MyChecklistRoute()),
       ),
       HomeItemCard(
         icon: Icons.menu_book,

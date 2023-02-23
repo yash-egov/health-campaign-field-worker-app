@@ -1,22 +1,23 @@
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/checklist/checklist_bloc.dart';
 import '../widgets/header/back_navigation_help_header.dart';
 import '../widgets/localized.dart';
+import 'checklist_details.dart';
 
-enum MyChecklistPage { received, issued, returned, damaged, lost }
-
-class ManageStocksPage extends LocalizedStatefulWidget {
-  const ManageStocksPage({
+class MyChecklistPage extends LocalizedStatefulWidget {
+  const MyChecklistPage({
     super.key,
     super.appLocalizations,
   });
 
   @override
-  State<ManageStocksPage> createState() => _ManageStocksPageState();
+  State<MyChecklistPage> createState() => _MyChecklistPageState();
 }
 
-class _ManageStocksPageState extends LocalizedState<ManageStocksPage> {
+class _MyChecklistPageState extends LocalizedState<MyChecklistPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -49,7 +50,12 @@ class _ManageStocksPageState extends LocalizedState<ManageStocksPage> {
                       'Use this checklist to supervise the team formation for Registration & Distribution',
                   prefixIcon: Icons.article,
                   sufixIcon: Icons.arrow_circle_right,
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChecklistDetailsPage(),
+                    ),
+                  ),
                 ),
                 DigitListView(
                   title: 'Warehouses',
