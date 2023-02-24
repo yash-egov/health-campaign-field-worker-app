@@ -5,6 +5,7 @@ import 'package:uuid/uuid.dart';
 
 export 'app_exception.dart';
 export 'constants.dart';
+export 'enums.dart';
 
 Expression<bool> buildAnd(Iterable<Expression<bool?>> iterable) {
   if (iterable.isEmpty) return const Constant(true);

@@ -64,6 +64,7 @@ class ChecklistBloc extends Bloc<ChecklistEvent, ChecklistState> {
   }
 
   _onUpdateAnswer(UpdateAnswer event, Emitter<ChecklistState> state) {
+    print('########## in the bloc -- updating the answer -------');
     choices[event.index] = event.option;
     reasons[event.index] = event.reason;
   }
