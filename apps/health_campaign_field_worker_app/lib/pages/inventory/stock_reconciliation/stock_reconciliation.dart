@@ -46,10 +46,11 @@ class _StockReconciliationPageState
         validators: [Validators.required],
       ),
       _manualCountKey: FormControl<String>(
-        value: '0',
+        value: '1',
         validators: [
           Validators.number,
           Validators.required,
+          CustomValidator.validStockCount,
         ],
       ),
       _reconciliationCommentsKey: FormControl<String>(),
@@ -352,7 +353,7 @@ class _StockReconciliationPageState
                                           localizations.translate(
                                             i18.stockReconciliationDetails
                                                 .stockReceived,
-                                          ): stockState.stockReceived,
+                                          ): stockState.stockReceived.toStringAsFixed(0),
                                         },
                                       ),
                                       const DigitDivider(),
@@ -363,7 +364,7 @@ class _StockReconciliationPageState
                                           localizations.translate(
                                             i18.stockReconciliationDetails
                                                 .stockIssued,
-                                          ): stockState.stockIssued,
+                                          ): stockState.stockIssued.toStringAsFixed(0),
                                         },
                                       ),
                                       const DigitDivider(),
@@ -374,7 +375,7 @@ class _StockReconciliationPageState
                                           localizations.translate(
                                             i18.stockReconciliationDetails
                                                 .stockReturned,
-                                          ): stockState.stockReturned,
+                                          ): stockState.stockReturned.toStringAsFixed(0),
                                         },
                                       ),
                                       const DigitDivider(),
@@ -385,7 +386,7 @@ class _StockReconciliationPageState
                                           localizations.translate(
                                             i18.stockReconciliationDetails
                                                 .stockLost,
-                                          ): stockState.stockLost,
+                                          ): stockState.stockLost.toStringAsFixed(0),
                                         },
                                       ),
                                       const DigitDivider(),
@@ -396,7 +397,7 @@ class _StockReconciliationPageState
                                           localizations.translate(
                                             i18.stockReconciliationDetails
                                                 .stockDamaged,
-                                          ): stockState.stockDamaged,
+                                          ): stockState.stockDamaged.toStringAsFixed(0),
                                         },
                                       ),
                                       const DigitDivider(),
@@ -407,7 +408,7 @@ class _StockReconciliationPageState
                                           localizations.translate(
                                             i18.stockReconciliationDetails
                                                 .stockOnHand,
-                                          ): stockState.stockInHand,
+                                          ): stockState.stockInHand.toStringAsFixed(0),
                                         },
                                       ),
                                       DigitInfoCard(
@@ -436,8 +437,22 @@ class _StockReconciliationPageState
                                         formControlName: _manualCountKey,
                                         keyboardType: const TextInputType
                                             .numberWithOptions(
-                                          decimal: true,
+                                          decimal: false,
                                         ),
+                                        validationMessages: {
+                                          "required": (object) => i18
+                                              .stockReconciliationDetails
+                                              .manualCountRequiredError,
+                                          "number": (object) => i18
+                                              .stockReconciliationDetails
+                                              .manualCountInvalidType,
+                                          "min": (object) => i18
+                                              .stockReconciliationDetails
+                                              .manualCountMinError,
+                                          "max": (object) => i18
+                                              .stockReconciliationDetails
+                                              .manualCountMaxError,
+                                        },
                                       ),
                                       DigitTextFormField(
                                         label: localizations.translate(
