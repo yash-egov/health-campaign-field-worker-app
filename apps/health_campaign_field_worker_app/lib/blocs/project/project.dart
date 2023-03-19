@@ -4,11 +4,11 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
+import 'package:recase/recase.dart';
 
 import '../../data/data_repository.dart';
 import '../../data/local_store/no_sql/schema/app_configuration.dart';
 import '../../data/local_store/secure_store/secure_store.dart';
-import '../../models/auth/auth_model.dart';
 import '../../models/data_model.dart';
 import '../../utils/environment_config.dart';
 import '../../utils/utils.dart';
@@ -50,8 +50,11 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final LocalRepository<ServiceDefinitionModel, ServiceDefinitionSearchModel>
       serviceDefinitionLocalRepository;
 
+  ///Boundary Resource Repositories
   final RemoteRepository<BoundaryModel, BoundarySearchModel>
       boundaryRemoteRepository;
+  final LocalRepository<BoundaryModel, BoundarySearchModel>
+      boundaryLocalRepository;
 
   /// Project Resource Repositories
   final RemoteRepository<ProjectResourceModel, ProjectResourceSearchModel>
@@ -77,6 +80,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.facilityLocalRepository,
     required this.serviceDefinitionRemoteRepository,
     required this.boundaryRemoteRepository,
+    required this.boundaryLocalRepository,
     required this.isar,
     required this.serviceDefinitionLocalRepository,
     required this.projectResourceLocalRepository,
@@ -180,46 +184,13 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     final userObject = await localSecureStore.userRequestModel;
     List<String> codes = [];
     for (var elements in userObject!.roles) {
-      switch (elements.code) {
-        case UserRoleCodeEnum.warehouseManager:
-          configs.first.checklistTypes?.map((e) => e.code).forEach((element) {
-            for (var ele in projects) {
-              codes.add('${ele.name}.$element.${'WAREHOUSE_MANAGER'}');
-            }
-          });
-
-          break;
-        case UserRoleCodeEnum.registrar:
-          configs.first.checklistTypes?.map((e) => e.code).forEach((element) {
-            for (var ele in projects) {
-              codes.add('${ele.name}.$element.${'REGISTRAR'}');
-            }
-          });
-
-          break;
-        case UserRoleCodeEnum.systemAdministrator:
-          configs.first.checklistTypes?.map((e) => e.code).forEach((element) {
-            for (var ele in projects) {
-              codes.add('${ele.name}.$element.${'SYSTEM_ADMINISTRATOR'}');
-            }
-          });
-
-          break;
-        case UserRoleCodeEnum.supervisor:
-          configs.first.checklistTypes?.map((e) => e.code).forEach((element) {
-            for (var ele in projects) {
-              codes.add('${ele.name}.$element.${'SUPERVISOR'}');
-            }
-          });
-          break;
-        case UserRoleCodeEnum.distributor:
-          configs.first.checklistTypes?.map((e) => e.code).forEach((element) {
-            for (var ele in projects) {
-              codes.add('${ele.name}.$element.${'DISTRIBUTOR'}');
-            }
-          });
-          break;
-      }
+      configs.first.checklistTypes?.map((e) => e.code).forEach((item) {
+        for (final project in projects) {
+          codes.add(
+            '${project.name}.$item.${elements.code.name.snakeCase.toUpperCase()}',
+          );
+        }
+      });
     }
 
     final serviceDefinition = await serviceDefinitionRemoteRepository
@@ -268,14 +239,26 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     ProjectSelectProjectEvent event,
     ProjectEmitter emit,
   ) async {
-    final List<BoundaryModel> boundaries = (await boundaryRemoteRepository
-        .search(BoundarySearchModel(boundaryType: '')));
+    final List<BoundaryModel> boundaries =
+        await boundaryRemoteRepository.search(
+      BoundarySearchModel(
+        boundaryType: event.model.address?.boundaryType,
+        code: event.model.address?.boundaryCode.toString(),
+      ),
+    );
 
-    state.maybeMap(
+    await state.maybeMap(
       orElse: () {
         return;
       },
-      fetched: (value) {
+      fetched: (value) async {
+        for (var element in boundaries) {
+          await boundaryLocalRepository.create(
+            element,
+            createOpLog: false,
+            dataOperation: DataOperation.create,
+          );
+        }
         emit(value.copyWith(selectedProject: event.model));
       },
     );

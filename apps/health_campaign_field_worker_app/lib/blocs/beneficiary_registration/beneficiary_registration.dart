@@ -218,6 +218,7 @@ class BeneficiaryRegistrationBloc
             ),
           );
           for (var element in value.individualModel) {
+            print(value.addressModel.auditDetails?.createdBy);
             await individualRepository.update(
               element.copyWith(
                 address: [
