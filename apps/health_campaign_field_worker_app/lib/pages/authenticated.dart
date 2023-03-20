@@ -14,6 +14,7 @@ import '../blocs/sync/sync.dart';
 import '../data/local_store/no_sql/schema/oplog.dart';
 import '../models/data_model.dart';
 import '../router/app_router.dart';
+import '../utils/i18_key_constants.dart';
 import '../utils/utils.dart';
 import '../widgets/sidebar/side_bar.dart';
 
@@ -217,10 +218,11 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
             ),
           ],
         ),
-        drawer: Container(
-          margin: const EdgeInsets.only(top: kToolbarHeight * 1.36),
-          child: const Drawer(child: SideBar()),
-        ),
+        drawer:
+            (context.router.currentUrl != '/${ProjectSelectionRoute().path}' &&
+                    visiable == false)
+                ? const Drawer(child: SideBar())
+                : null,
         body: MultiBlocProvider(
           providers: [
             BlocProvider(
