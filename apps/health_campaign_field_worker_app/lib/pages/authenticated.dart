@@ -9,6 +9,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../blocs/boundary/boundary.dart';
 import '../blocs/household_details/household_details.dart';
+import '../blocs/search_households/search_households.dart';
 import '../blocs/sync/sync.dart';
 import '../data/local_store/no_sql/schema/oplog.dart';
 import '../models/data_model.dart';
@@ -222,6 +223,23 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
           providers: [
             BlocProvider(
               create: (context) {
+                return SearchHouseholdsBloc(
+                  projectBeneficiary: context.repository<
+                      ProjectBeneficiaryModel, ProjectBeneficiarySearchModel>(),
+                  householdMember: context.repository<HouseholdMemberModel,
+                      HouseholdMemberSearchModel>(),
+                  household: context
+                      .repository<HouseholdModel, HouseholdSearchModel>(),
+                  individual: context
+                      .repository<IndividualModel, IndividualSearchModel>(),
+                  taskDataRepository:
+                      context.repository<TaskModel, TaskSearchModel>(),
+                  projectId: context.projectId,
+                )..add(const SearchHouseholdsClearEvent());
+              },
+            ),
+            BlocProvider(
+              create: (context) {
                 final userId = context.loggedInUserUuid;
 
                 final isar = context.read<Isar>();
@@ -266,6 +284,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
             BlocProvider(
               create: (_) => LocationBloc(location: Location())
                 ..add(const LoadLocationEvent()),
+              lazy: false,
             ),
             BlocProvider(
               create: (_) =>
