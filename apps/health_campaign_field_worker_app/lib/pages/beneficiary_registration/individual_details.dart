@@ -60,8 +60,8 @@ class _IndividualDetailsPageState
                 } else {
                   (router.parent() as StackRouter).pop();
                   context.read<SearchHouseholdsBloc>().add(
-                        SearchHouseholdsByHouseholdsEvent(
-                          householdModel: value.householdModel,
+                        SearchHouseholdsSearchByHouseholdHeadEvent(
+                          searchText: value.toString(),
                           projectId: context.projectId,
                         ),
                       );
