@@ -100,7 +100,9 @@ class _DeliverInterventionPageState
                                                       .clientReferenceId,
                                               tenantId:
                                                   envConfig.variables.tenantId,
-                                              rowVersion: 1,
+                                              rowVersion: householdMemberWrapper
+                                                      .task?.rowVersion ??
+                                                  1,
                                               projectId: context.projectId,
                                               status: Status.delivered.name,
                                               createdDate: context
@@ -112,9 +114,17 @@ class _DeliverInterventionPageState
                                                       ?.resources
                                                       ?.first
                                                       .id,
+                                                  taskId: householdMemberWrapper
+                                                      .task?.id,
                                                   clientReferenceId:
                                                       clientReferenceId,
-                                                  rowVersion: 1,
+                                                  rowVersion:
+                                                      householdMemberWrapper
+                                                              .task
+                                                              ?.resources
+                                                              ?.first
+                                                              .rowVersion ??
+                                                          1,
                                                   isDelivered: true,
                                                   tenantId: envConfig
                                                       .variables.tenantId,
@@ -139,8 +149,15 @@ class _DeliverInterventionPageState
                                                   auditDetails: AuditDetails(
                                                     createdBy: context
                                                         .loggedInUserUuid,
-                                                    createdTime: context
-                                                        .millisecondsSinceEpoch(),
+                                                    createdTime:
+                                                        householdMemberWrapper
+                                                                .task
+                                                                ?.resources
+                                                                ?.first
+                                                                .auditDetails
+                                                                ?.createdTime ??
+                                                            context
+                                                                .millisecondsSinceEpoch(),
                                                     lastModifiedBy: context
                                                         .loggedInUserUuid,
                                                     lastModifiedTime: context
@@ -149,12 +166,23 @@ class _DeliverInterventionPageState
                                                 ),
                                               ],
                                               address: householdMemberWrapper
-                                                  .household.address,
+                                                  .household.address
+                                                  ?.copyWith(
+                                                relatedClientReferenceId:
+                                                    clientReferenceId,
+                                                id: state.householdMemberWrapper
+                                                    .task?.address?.id,
+                                              ),
                                               auditDetails: AuditDetails(
                                                 createdBy:
                                                     context.loggedInUserUuid,
-                                                createdTime: context
-                                                    .millisecondsSinceEpoch(),
+                                                createdTime: householdMemberWrapper
+                                                        .task
+                                                        ?.address
+                                                        ?.auditDetails
+                                                        ?.createdTime ??
+                                                    context
+                                                        .millisecondsSinceEpoch(),
                                                 lastModifiedBy:
                                                     context.loggedInUserUuid,
                                                 lastModifiedTime: context
@@ -324,7 +352,7 @@ class _DeliverInterventionPageState
                                               .household.memberCount ??
                                           householdMemberWrapper.members.length;
 
-                                      return min(count * 1.8, 3).round();
+                                      return min(count / 1.8, 3).round();
                                     }(),
                                   },
                                 ),

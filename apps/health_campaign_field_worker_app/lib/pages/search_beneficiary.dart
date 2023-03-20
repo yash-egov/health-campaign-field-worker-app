@@ -6,11 +6,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../blocs/beneficiary_registration/beneficiary_registration.dart';
 import '../blocs/search_households/search_households.dart';
 import '../models/beneficiary_statistics/beneficiary_statistics_model.dart';
-import '../models/entities/household.dart';
-import '../models/entities/household_member.dart';
-import '../models/entities/individual.dart';
-import '../models/entities/project_beneficiary.dart';
-import '../models/entities/task.dart';
+import '../models/data_model.dart';
 import '../router/app_router.dart';
 import '../utils/i18_key_constants.dart' as i18;
 import '../utils/utils.dart';
@@ -193,29 +189,6 @@ class _SearchBeneficiaryPageState
                                 searchQuery: state.searchQuery,
                               ),
                             ));
-
-                    // final onPressed = state.mapOrNull(
-                    //   notFound: (value) {
-                    //     return () => router.push(
-                    //           BeneficiaryRegistrationWrapperRoute(
-                    //             initialState:
-                    //                 BeneficiaryRegistrationCreateState(
-                    //               searchQuery: value.searchQuery,
-                    //             ),
-                    //           ),
-                    //         );
-                    //   },
-                    //   results: (value) {
-                    //     return () => router.push(
-                    //           BeneficiaryRegistrationWrapperRoute(
-                    //             initialState:
-                    //                 BeneficiaryRegistrationCreateState(
-                    //               searchQuery: value.searchQuery,
-                    //             ),
-                    //           ),
-                    //         );
-                    //   },
-                    // );
 
                     return DigitElevatedButton(
                       onPressed: onPressed,

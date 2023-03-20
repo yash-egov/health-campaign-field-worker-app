@@ -82,7 +82,7 @@ class MainApplication extends StatelessWidget {
                 return BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, authState) {
                     if (appConfigState is! AppInitialized) {
-                      return MaterialApp(
+                      return const MaterialApp(
                         home: Scaffold(
                           body: Center(
                             child: Text('Loading'),

@@ -79,122 +79,120 @@ class _IndividualDetailsPageState
                 height: 90,
                 child: DigitCard(
                   child: DigitElevatedButton(
-                    onPressed: !form.valid
-                        ? null
-                        : () async {
-                            final userId = context.loggedInUserUuid;
-                            final projectId = context.projectId;
+                    onPressed: () async {
+                      final userId = context.loggedInUserUuid;
+                      final projectId = context.projectId;
 
-                            form.markAllAsTouched();
-                            if (!form.valid) return;
+                      form.markAllAsTouched();
+                      if (!form.valid) return;
 
-                            state.maybeWhen(
-                              orElse: () {
-                                return;
-                              },
-                              create: (
-                                addressModel,
-                                householdModel,
-                                individualModel,
-                                registrationDate,
-                                searchQuery,
-                                loading,
-                                isHeadOfHousehold,
-                              ) async {
-                                final individual = _getIndividualModel(
+                      state.maybeWhen(
+                        orElse: () {
+                          return;
+                        },
+                        create: (
+                          addressModel,
+                          householdModel,
+                          individualModel,
+                          registrationDate,
+                          searchQuery,
+                          loading,
+                          isHeadOfHousehold,
+                        ) async {
+                          final individual = _getIndividualModel(
+                            context,
+                            form: form,
+                            oldIndividual: null,
+                          );
+
+                          bloc.add(
+                            BeneficiaryRegistrationSaveIndividualDetailsEvent(
+                              model: individual,
+                              isHeadOfHousehold: widget.isHeadOfHousehold,
+                            ),
+                          );
+
+                          final submit = await DigitDialog.show<bool>(
+                            context,
+                            options: DigitDialogOptions(
+                              titleText: localizations.translate(
+                                i18.deliverIntervention.dialogTitle,
+                              ),
+                              contentText: localizations.translate(
+                                i18.deliverIntervention.dialogContent,
+                              ),
+                              primaryAction: DigitDialogActions(
+                                label: localizations.translate(
+                                  i18.common.coreCommonSubmit,
+                                ),
+                                action: (context) {
+                                  Navigator.of(
+                                    context,
+                                    rootNavigator: true,
+                                  ).pop(true);
+                                },
+                              ),
+                              secondaryAction: DigitDialogActions(
+                                label: localizations.translate(
+                                  i18.common.coreCommonCancel,
+                                ),
+                                action: (context) => Navigator.of(
                                   context,
-                                  form: form,
-                                  oldIndividual: null,
-                                );
+                                  rootNavigator: true,
+                                ).pop(false),
+                              ),
+                            ),
+                          );
 
-                                bloc.add(
-                                  BeneficiaryRegistrationSaveIndividualDetailsEvent(
-                                    model: individual,
-                                    isHeadOfHousehold: widget.isHeadOfHousehold,
-                                  ),
-                                );
-
-                                final submit = await DigitDialog.show<bool>(
-                                  context,
-                                  options: DigitDialogOptions(
-                                    titleText: localizations.translate(
-                                      i18.deliverIntervention.dialogTitle,
-                                    ),
-                                    contentText: localizations.translate(
-                                      i18.deliverIntervention.dialogContent,
-                                    ),
-                                    primaryAction: DigitDialogActions(
-                                      label: localizations.translate(
-                                        i18.common.coreCommonSubmit,
-                                      ),
-                                      action: (context) {
-                                        Navigator.of(
-                                          context,
-                                          rootNavigator: true,
-                                        ).pop(true);
-                                      },
-                                    ),
-                                    secondaryAction: DigitDialogActions(
-                                      label: localizations.translate(
-                                        i18.common.coreCommonCancel,
-                                      ),
-                                      action: (context) => Navigator.of(
-                                        context,
-                                        rootNavigator: true,
-                                      ).pop(false),
-                                    ),
-                                  ),
-                                );
-
-                                if (submit ?? false) {
-                                  bloc.add(
-                                    BeneficiaryRegistrationCreateEvent(
-                                      projectId: projectId,
-                                      userUuid: userId,
-                                    ),
-                                  );
-                                }
-                              },
-                              editIndividual: (
-                                householdModel,
-                                individualModel,
-                                addressModel,
-                                loading,
-                              ) {
-                                final individual = _getIndividualModel(
-                                  context,
-                                  form: form,
-                                  oldIndividual: individualModel,
-                                );
-
-                                bloc.add(
-                                  BeneficiaryRegistrationUpdateIndividualDetailsEvent(
-                                    addressModel: addressModel,
-                                    model: individual,
-                                  ),
-                                );
-                              },
-                              addMember: (
-                                addressModel,
-                                householdModel,
-                                loading,
-                              ) {
-                                final individual = _getIndividualModel(
-                                  context,
-                                  form: form,
-                                );
-
-                                bloc.add(
-                                  BeneficiaryRegistrationAddMemberEvent(
-                                    householdModel: householdModel,
-                                    individualModel: individual,
-                                    addressModel: addressModel,
-                                    userUuid: userId,
-                                  ),
-                                );
-                              },
+                          if (submit ?? false) {
+                            bloc.add(
+                              BeneficiaryRegistrationCreateEvent(
+                                projectId: projectId,
+                                userUuid: userId,
+                              ),
                             );
-                          },
+                          }
+                        },
+                        editIndividual: (
+                          householdModel,
+                          individualModel,
+                          addressModel,
+                          loading,
+                        ) {
+                          final individual = _getIndividualModel(
+                            context,
+                            form: form,
+                            oldIndividual: individualModel,
+                          );
+
+                          bloc.add(
+                            BeneficiaryRegistrationUpdateIndividualDetailsEvent(
+                              addressModel: addressModel,
+                              model: individual,
+                            ),
+                          );
+                        },
+                        addMember: (
+                          addressModel,
+                          householdModel,
+                          loading,
+                        ) {
+                          final individual = _getIndividualModel(
+                            context,
+                            form: form,
+                          );
+
+                          bloc.add(
+                            BeneficiaryRegistrationAddMemberEvent(
+                              householdModel: householdModel,
+                              individualModel: individual,
+                              addressModel: addressModel,
+                              userUuid: userId,
+                            ),
+                          );
+                        },
+                      );
+                    },
                     child: Center(
                       child: Text(
                         state.mapOrNull(
@@ -260,19 +258,10 @@ class _IndividualDetailsPageState
                                   onChanged: (value) {
                                     setState(() {
                                       if (value == 'DEFAULT') {
-                                        form
-                                            .control(_idNumberKey)
-                                            .setValidators(
-                                          [Validators.required],
-                                        );
+                                        form.control(_idNumberKey).value =
+                                            IdGen.i.identifier.toString();
                                       } else {
-                                        form
-                                            .control(_idNumberKey)
-                                            .setValidators(
-                                          [],
-                                          updateParent: true,
-                                          autoValidate: true,
-                                        );
+                                        form.control(_idNumberKey).value = null;
                                       }
                                     });
                                   },
@@ -283,10 +272,6 @@ class _IndividualDetailsPageState
                                     },
                                   ).toList(),
                                   formControlName: _idTypeKey,
-                                  validationMessages: {
-                                    'required': (object) =>
-                                        'ID Type is required',
-                                  },
                                 );
                               },
                             ),
@@ -297,6 +282,9 @@ class _IndividualDetailsPageState
                               ReactiveFormConsumer(
                                 builder: (context, formGroup, child) {
                                   return DigitTextFormField(
+                                    readOnly:
+                                        form.control(_idNumberKey).value ==
+                                            'DEFAULT',
                                     isRequired: form
                                         .control(_idNumberKey)
                                         .validators
@@ -417,7 +405,7 @@ class _IndividualDetailsPageState
         : null;
 
     identifier ??= IdentifierModel(
-      individualClientReferenceId: individual.clientReferenceId,
+      clientReferenceId: individual.clientReferenceId,
       tenantId: envConfig.variables.tenantId,
       rowVersion: 1,
       auditDetails: AuditDetails(
@@ -470,6 +458,7 @@ class _IndividualDetailsPageState
         value: individual?.identifiers?.firstOrNull?.identifierType,
       ),
       _idNumberKey: FormControl<String>(
+        validators: [Validators.required],
         value: individual?.identifiers?.firstOrNull?.identifierId,
       ),
       _dobKey: FormControl<DateTime>(

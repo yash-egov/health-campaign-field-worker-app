@@ -230,6 +230,13 @@ class TaskLocalRepository extends LocalRepository<TaskModel, TaskSearchModel> {
   }) async {
     final taskCompanion = entity.companion;
 
+    final addressCompanion = entity.address
+        ?.copyWith(
+          relatedClientReferenceId: entity.clientReferenceId,
+          auditDetails: entity.auditDetails,
+        )
+        .companion;
+
     final resourcesCompanions = entity.resources?.map((e) {
           return e
               .copyWith(clientReferenceId: entity.clientReferenceId)
@@ -245,6 +252,17 @@ class TaskLocalRepository extends LocalRepository<TaskModel, TaskSearchModel> {
           entity.clientReferenceId,
         ),
       );
+
+      if (addressCompanion != null) {
+        batch.update(
+          sql.address,
+          addressCompanion,
+          where: (table) => table.relatedClientReferenceId.equals(
+            addressCompanion.relatedClientReferenceId.value,
+          ),
+        );
+      }
+
       batch.insertAllOnConflictUpdate(sql.taskResource, resourcesCompanions);
     });
 
