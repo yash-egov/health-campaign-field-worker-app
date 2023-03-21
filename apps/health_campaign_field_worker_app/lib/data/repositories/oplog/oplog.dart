@@ -39,8 +39,6 @@ abstract class OpLogManager<T extends EntityModel> {
     final createdEntries = await isar.opLogs
         .filter()
         .operationEqualTo(DataOperation.create)
-        .serverGeneratedIdIsNull()
-        .isSyncedEqualTo(false)
         .createdByEqualTo(createdBy)
         .entityTypeEqualTo(type)
         .findAll();

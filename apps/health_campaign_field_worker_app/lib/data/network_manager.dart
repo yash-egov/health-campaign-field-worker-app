@@ -201,40 +201,6 @@ class NetworkManager {
 
             break;
 
-          case DataModelType.householdMember:
-            responseEntities = await remote.search(HouseholdMemberSearchModel(
-              clientReferenceId: entities
-                  .whereType<HouseholdMemberModel>()
-                  .map((e) => e.clientReferenceId)
-                  .whereNotNull()
-                  .toList(),
-            ));
-
-            for (var element in typeGroupedEntity.value) {
-              if (element.id == null) return;
-              final entity = element.entity as HouseholdMemberModel;
-              final responseEntity = responseEntities
-                  .whereType<HouseholdMemberModel>()
-                  .firstWhereOrNull(
-                    (e) => e.clientReferenceId == entity.clientReferenceId,
-                  );
-              final updatedEntity = entity.copyWith(id: responseEntity?.id);
-
-              await local.opLogManager.updateServerGeneratedIdInAllOplog(
-                responseEntity?.id,
-                entity.clientReferenceId,
-              );
-
-              await local.opLogManager.update(
-                element.copyWith(
-                  entity: updatedEntity,
-                  serverGeneratedId: responseEntity?.id,
-                ),
-              );
-            }
-
-            break;
-
           case DataModelType.projectBeneficiary:
             responseEntities =
                 await remote.search(ProjectBeneficiarySearchModel(
