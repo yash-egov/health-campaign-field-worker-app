@@ -15,6 +15,7 @@ export 'entities/household.dart';
 export 'entities/household_member.dart';
 export 'entities/identifier.dart';
 export 'entities/individual.dart';
+export 'entities/locality.dart';
 export 'entities/name.dart';
 export 'entities/product.dart';
 export 'entities/product_variant.dart';
@@ -36,7 +37,6 @@ export 'entities/task.dart';
 export 'entities/task_resource.dart';
 export 'entities/transaction_reason.dart';
 export 'entities/transaction_type.dart';
-export 'entities/locality.dart';
 export 'oplog/oplog_entry.dart';
 
 @MappableClass()
@@ -51,6 +51,10 @@ abstract class EntityModel extends DataModel {
   final AuditDetails? auditDetails;
 
   const EntityModel({this.auditDetails});
+
+  String get remotePrimaryKey;
+
+  String get localPrimaryKey;
 }
 
 @MappableClass(ignoreNull: true)

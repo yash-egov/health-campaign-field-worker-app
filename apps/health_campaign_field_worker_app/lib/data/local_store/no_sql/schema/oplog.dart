@@ -25,6 +25,8 @@ class OpLog {
 
   String? serverGeneratedId;
 
+  String? clientReferenceId;
+
   DateTime? syncedOn;
 
   late String createdBy;

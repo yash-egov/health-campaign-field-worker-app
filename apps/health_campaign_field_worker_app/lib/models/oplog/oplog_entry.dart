@@ -12,17 +12,39 @@ class OpLogEntry<T extends EntityModel> {
   final DateTime dateCreated;
   final String createdBy;
   final DateTime? syncedOn;
+  final String? serverGeneratedId;
 
   const OpLogEntry(
     this.entity,
     this.operation, {
-    this.id,
     required this.createdBy,
     required this.type,
-    this.isSynced = false,
     required this.dateCreated,
+    this.id,
+    this.isSynced = false,
+    this.serverGeneratedId,
     this.syncedOn,
   });
+
+  String? getEntityId([String key = 'id']) {
+    final entityMap = entity.toMap();
+    if (entityMap.containsKey(key)) {
+      final entityId = entityMap[key];
+      if (entityId is String) return entityId;
+    }
+
+    return null;
+  }
+
+  String? getEntityClientReferenceId([String? key = 'clientReferenceId']) {
+    final entityMap = entity.toMap();
+    if (entityMap.containsKey(key)) {
+      final entityId = entityMap[key];
+      if (entityId is String) return entityId;
+    }
+
+    return null;
+  }
 }
 
 @MappableEnum()

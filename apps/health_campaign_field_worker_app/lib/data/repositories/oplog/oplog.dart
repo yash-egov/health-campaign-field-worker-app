@@ -21,6 +21,14 @@ abstract class OpLogManager<T extends EntityModel> {
               ..entityType = type
               ..createdBy = entry.createdBy
               ..createdOn = entry.dateCreated
+              ..clientReferenceId = entry.getEntityClientReferenceId(
+                entry.entity.localPrimaryKey,
+              )
+              ..serverGeneratedId = entry.serverGeneratedId ??
+                  entry.getEntityId(
+                    entry.entity.remotePrimaryKey,
+                  )
+              ..syncedOn = entry.syncedOn
               ..entityString = entry.entity.toJson(),
           ));
 
@@ -28,12 +36,38 @@ abstract class OpLogManager<T extends EntityModel> {
     DataModelType type, {
     required String createdBy,
   }) async {
-    final entries = await isar.opLogs
+    final createdEntries = await isar.opLogs
         .filter()
+        .operationEqualTo(DataOperation.create)
+        .serverGeneratedIdIsNull()
         .isSyncedEqualTo(false)
         .createdByEqualTo(createdBy)
         .entityTypeEqualTo(type)
         .findAll();
+
+    final updateEntries = await isar.opLogs
+        .filter()
+        .serverGeneratedIdIsNotNull()
+        .operationEqualTo(DataOperation.update)
+        .isSyncedEqualTo(false)
+        .createdByEqualTo(createdBy)
+        .entityTypeEqualTo(type)
+        .findAll();
+
+    final deleteEntries = await isar.opLogs
+        .filter()
+        .serverGeneratedIdIsNotNull()
+        .operationEqualTo(DataOperation.delete)
+        .isSyncedEqualTo(false)
+        .createdByEqualTo(createdBy)
+        .entityTypeEqualTo(type)
+        .findAll();
+
+    final entries = [
+      createdEntries,
+      updateEntries,
+      deleteEntries,
+    ].expand((element) => element);
 
     return entries
         .map((e) => OpLogEntry<T>(
@@ -41,6 +75,8 @@ abstract class OpLogManager<T extends EntityModel> {
               e.operation,
               dateCreated: e.createdOn,
               id: e.id,
+              syncedOn: e.syncedOn,
+              serverGeneratedId: e.serverGeneratedId,
               createdBy: e.createdBy,
               type: e.entityType,
               isSynced: e.isSynced,
@@ -63,6 +99,8 @@ abstract class OpLogManager<T extends EntityModel> {
               Mapper.fromJson<T>(e.entityString),
               e.operation,
               dateCreated: e.createdOn,
+              serverGeneratedId: e.serverGeneratedId,
+              syncedOn: e.syncedOn,
               id: e.id,
               createdBy: e.createdBy,
               type: e.entityType,
@@ -70,6 +108,26 @@ abstract class OpLogManager<T extends EntityModel> {
             ))
         .where((element) => element.id != null)
         .toList();
+  }
+
+  Future<void> updateServerGeneratedIdInAllOplog(
+    String? serverGeneratedId,
+    String clientReferenceId,
+  ) async {
+    if (serverGeneratedId == null) return;
+
+    await isar.writeTxn(() async {
+      final opLogs = await isar.opLogs
+          .filter()
+          .clientReferenceIdEqualTo(clientReferenceId)
+          .findAll();
+
+      for (final oplog in opLogs) {
+        await isar.opLogs.put(
+          oplog..serverGeneratedId = serverGeneratedId,
+        );
+      }
+    });
   }
 
   FutureOr<void> update(OpLogEntry<EntityModel> entry) async {
@@ -82,6 +140,14 @@ abstract class OpLogManager<T extends EntityModel> {
           ..operation = entry.operation
           ..isSynced = entry.isSynced
           ..entityType = entry.type
+          ..clientReferenceId = entry.getEntityClientReferenceId(
+            entry.entity.localPrimaryKey,
+          )
+          ..serverGeneratedId = entry.serverGeneratedId ??
+              entry.getEntityId(
+                entry.entity.remotePrimaryKey,
+              )
+          ..syncedOn = entry.syncedOn
           ..createdBy = entry.createdBy
           ..createdOn = entry.dateCreated
           ..syncedOn = entry.syncedOn
