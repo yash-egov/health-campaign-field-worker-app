@@ -49,6 +49,12 @@ class ServiceAttributesModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   ServiceAttributesCompanion get companion {
     return ServiceAttributesCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

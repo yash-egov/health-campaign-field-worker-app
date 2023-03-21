@@ -13,6 +13,8 @@ class ConfigModel {
   final List<AttributeModel> sqlAttributes;
   final List<AttributeModel> referenceAttributes;
   final bool isPlural;
+  final String remotePrimaryKey;
+  final String localPrimaryKey;
   final bool isSearchResponsePlural;
 
   final bool createRepository;
@@ -31,6 +33,8 @@ class ConfigModel {
     this.createRepository = false,
     this.isPlural = false,
     this.isSearchResponsePlural = false,
+    this.remotePrimaryKey = 'id',
+    this.localPrimaryKey = 'clientReferenceId',
   });
 }
 

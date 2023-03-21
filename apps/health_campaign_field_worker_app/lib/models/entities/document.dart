@@ -47,6 +47,12 @@ class DocumentModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   DocumentCompanion get companion {
     return DocumentCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

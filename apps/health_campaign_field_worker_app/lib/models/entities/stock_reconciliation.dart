@@ -75,6 +75,12 @@ class StockReconciliationModel extends EntityModel {
   int  get dateOfReconciliation => dateOfReconciliationTime.millisecondsSinceEpoch;
   
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   StockReconciliationCompanion get companion {
     return StockReconciliationCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

@@ -63,6 +63,12 @@ class HouseholdMemberModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   HouseholdMemberCompanion get companion {
     return HouseholdMemberCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

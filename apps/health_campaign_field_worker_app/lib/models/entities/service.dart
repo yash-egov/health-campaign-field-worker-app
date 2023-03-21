@@ -61,6 +61,12 @@ class ServiceModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   ServiceCompanion get companion {
     return ServiceCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

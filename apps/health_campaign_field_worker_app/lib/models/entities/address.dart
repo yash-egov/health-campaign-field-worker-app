@@ -69,6 +69,12 @@ class AddressModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   AddressCompanion get companion {
     return AddressCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

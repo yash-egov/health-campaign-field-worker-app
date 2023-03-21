@@ -49,6 +49,12 @@ class {{name.pascalCase()}}Model extends EntityModel {
   int{{#nullable}}?{{/nullable}}  get {{name}} => {{name}}Time{{#nullable}}?{{/nullable}}.millisecondsSinceEpoch;
   {{/dateTimeAttributes}}
 
+  @override
+  String get remotePrimaryKey => '{{remotePrimaryKey}}';
+
+  @override
+  String get localPrimaryKey => '{{localPrimaryKey}}';
+
   {{name.pascalCase()}}Companion get companion {
     return {{name.pascalCase()}}Companion(
       auditCreatedBy: Value(auditDetails?.createdBy),

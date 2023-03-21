@@ -51,6 +51,12 @@ class IdentifierModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   IdentifierCompanion get companion {
     return IdentifierCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

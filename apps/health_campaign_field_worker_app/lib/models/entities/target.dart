@@ -43,6 +43,12 @@ class TargetModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   TargetCompanion get companion {
     return TargetCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

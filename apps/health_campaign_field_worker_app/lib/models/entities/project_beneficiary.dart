@@ -69,6 +69,12 @@ class ProjectBeneficiaryModel extends EntityModel {
   int  get dateOfRegistration => dateOfRegistrationTime.millisecondsSinceEpoch;
   
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   ProjectBeneficiaryCompanion get companion {
     return ProjectBeneficiaryCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

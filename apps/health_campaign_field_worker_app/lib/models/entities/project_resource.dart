@@ -45,6 +45,12 @@ class ProjectResourceModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   ProjectResourceCompanion get companion {
     return ProjectResourceCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

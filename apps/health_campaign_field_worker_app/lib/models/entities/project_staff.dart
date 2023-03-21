@@ -85,6 +85,12 @@ class ProjectStaffModel extends EntityModel {
   int?  get endDate => endDateTime?.millisecondsSinceEpoch;
   
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   ProjectStaffCompanion get companion {
     return ProjectStaffCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

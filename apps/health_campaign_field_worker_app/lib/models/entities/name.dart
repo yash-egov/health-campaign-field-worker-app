@@ -53,6 +53,12 @@ class NameModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   NameCompanion get companion {
     return NameCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

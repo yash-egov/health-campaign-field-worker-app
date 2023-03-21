@@ -55,6 +55,12 @@ class ProductModel extends EntityModel {
     super.auditDetails,
   }): super();
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   ProductCompanion get companion {
     return ProductCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),

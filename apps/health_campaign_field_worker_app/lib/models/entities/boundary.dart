@@ -2,8 +2,8 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:drift/drift.dart';
 
-import '../data_model.dart';
 import '../../data/local_store/sql_store/sql_store.dart';
+import '../data_model.dart';
 
 @MappableClass(ignoreNull: true)
 class BoundarySearchModel extends EntitySearchModel {
@@ -63,4 +63,10 @@ class BoundaryModel extends EntityModel {
       rowVersion: Value(rowVersion),
     );
   }
+
+  @override
+  String get localPrimaryKey => 'code';
+
+  @override
+  String get remotePrimaryKey => 'code';
 }

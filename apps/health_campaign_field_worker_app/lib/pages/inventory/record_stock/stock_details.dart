@@ -223,7 +223,8 @@ class _StockDetailsPageState extends LocalizedState<StockDetailsPage> {
 
                                     if (fields != null && fields.isNotEmpty) {
                                       final type = fields.firstWhereOrNull(
-                                          (element) => element.key == 'type');
+                                        (element) => element.key == 'type',
+                                      );
                                       final value = type?.value;
                                       if (value != null &&
                                           value is String &&

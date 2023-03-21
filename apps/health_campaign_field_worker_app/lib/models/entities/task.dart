@@ -139,6 +139,12 @@ class TaskModel extends EntityModel {
   int?  get createdDate => createdDateTime?.millisecondsSinceEpoch;
   
 
+  @override
+  String get remotePrimaryKey => 'id';
+
+  @override
+  String get localPrimaryKey => 'clientReferenceId';
+
   TaskCompanion get companion {
     return TaskCompanion(
       auditCreatedBy: Value(auditDetails?.createdBy),
