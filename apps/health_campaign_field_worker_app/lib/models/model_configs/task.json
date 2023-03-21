@@ -24,11 +24,6 @@
       "includeForQuery": true
     },
     {
-      "name": "createdBy",
-      "type": "String",
-      "includeForQuery": true
-    },
-    {
       "name": "status",
       "type": "String",
       "includeForQuery": true

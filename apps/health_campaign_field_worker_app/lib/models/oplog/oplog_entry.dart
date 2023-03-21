@@ -8,10 +8,12 @@ class OpLogEntry<T extends EntityModel> {
   final T entity;
   final DataModelType type;
   final DataOperation operation;
-  final bool isSynced;
+  final bool isSyncedUp;
+  final bool isSyncedDown;
   final DateTime dateCreated;
   final String createdBy;
-  final DateTime? syncedOn;
+  final DateTime? upSyncedOn;
+  final DateTime? downSyncedOn;
   final String? serverGeneratedId;
 
   const OpLogEntry(
@@ -21,9 +23,11 @@ class OpLogEntry<T extends EntityModel> {
     required this.type,
     required this.dateCreated,
     this.id,
-    this.isSynced = false,
+    this.isSyncedUp = false,
+    this.isSyncedDown = false,
     this.serverGeneratedId,
-    this.syncedOn,
+    this.upSyncedOn,
+    this.downSyncedOn,
   });
 
   String? getEntityId([String key = 'id']) {

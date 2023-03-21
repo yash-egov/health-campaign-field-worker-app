@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +26,7 @@ class AuthenticatedPageWrapper extends StatefulWidget {
 }
 
 class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
-  bool visiable = false;
+  bool visible = false;
   String selectedBoundaryValue = '';
   int random = 0;
 
@@ -50,7 +49,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
 
                     if (selectedBoundary == null) {
                       setState(() {
-                        visiable = true;
+                        visible = true;
                       });
                     }
                   },
@@ -58,7 +57,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
               },
               builder: (context, boundaryState) {
                 return PortalTarget(
-                  visible: visiable,
+                  visible: visible,
                   portalFollower: boundaryState.maybeWhen(
                     orElse: () {},
                     loading: () {
@@ -176,7 +175,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
                                                               selectedBoundaryValue,
                                                         ));
                                                     setState(() {
-                                                      visiable = false;
+                                                      visible = false;
                                                     });
                                                     context.router
                                                         .replace(HomeRoute());
@@ -207,7 +206,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
                           selectedBoundary,
                         ) async {
                           setState(() {
-                            visiable = true;
+                            visible = true;
                           });
                         },
                         orElse: () {},
@@ -222,7 +221,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
         ),
         drawer:
             (context.router.currentUrl != '/${ProjectSelectionRoute().path}' &&
-                    visiable == false)
+                    !visible)
                 ? const Drawer(child: SideBar())
                 : null,
         body: MultiBlocProvider(
@@ -258,7 +257,7 @@ class AuthenticatedPageWrapperState extends State<AuthenticatedPageWrapper> {
                 isar.opLogs
                     .filter()
                     .createdByEqualTo(userId)
-                    .isSyncedEqualTo(false)
+                    .isSyncedUpEqualTo(false)
                     .watch()
                     .listen(
                   (event) {

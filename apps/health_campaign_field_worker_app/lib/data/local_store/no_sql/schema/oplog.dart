@@ -10,7 +10,17 @@ class OpLog {
   late String entityString;
 
   @ignore
-  T getEntity<T extends EntityModel>() => Mapper.fromJson<T>(entityString);
+  T getEntity<T extends EntityModel>() {
+    final entityValue = Mapper.fromJson<T>(entityString);
+    final entityMap = entityValue.toMap();
+    entityMap.putIfAbsent(
+      entityValue.remotePrimaryKey,
+      () => serverGeneratedId,
+    );
+
+    return Mapper.fromMap<T>(entityMap);
+  }
+
   void entity<T extends EntityModel>(T entity) {
     entityString = entity.toJson();
   }
@@ -27,9 +37,13 @@ class OpLog {
 
   String? clientReferenceId;
 
-  DateTime? syncedOn;
+  DateTime? upSyncedOn;
+
+  DateTime? downSyncedOn;
 
   late String createdBy;
 
-  late bool isSynced;
+  late bool isSyncedDown;
+
+  late bool isSyncedUp;
 }

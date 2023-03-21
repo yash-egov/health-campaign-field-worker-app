@@ -41,7 +41,7 @@ class SyncBloc extends Bloc<SyncEvent, SyncState> {
       length ??= (await isar.opLogs
               .filter()
               .createdByEqualTo(event.createdBy)
-              .isSyncedEqualTo(false)
+              .isSyncedUpEqualTo(false)
               .findAll())
           .where((element) {
         switch (element.entityType) {
@@ -71,11 +71,21 @@ class SyncBloc extends Bloc<SyncEvent, SyncState> {
   ) async {
     try {
       emit(const SyncInProgressState());
+
       await networkManager.syncUp(
         localRepositories: event.localRepositories,
         remoteRepositories: event.remoteRepositories,
         userId: event.userId,
       );
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      await networkManager.syncDown(
+        localRepositories: event.localRepositories,
+        remoteRepositories: event.remoteRepositories,
+        userId: event.userId,
+      );
+
       emit(const SyncCompletedState());
     } catch (error) {
       emit(const SyncFailedState());
