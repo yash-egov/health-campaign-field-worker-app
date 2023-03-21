@@ -34,8 +34,8 @@ class IndividualDetailsPage extends LocalizedStatefulWidget {
 class _IndividualDetailsPageState
     extends LocalizedState<IndividualDetailsPage> {
   static const _individualNameKey = 'individualName';
-  static const _idTypeKey = 'idType';
-  static const _idNumberKey = 'idNumber';
+  // static const _idTypeKey = 'idType';
+  // static const _idNumberKey = 'idNumber';
   static const _dobKey = 'dob';
   static const _genderKey = 'gender';
   static const _mobileNumberKey = 'mobileNumber';
@@ -377,10 +377,10 @@ class _IndividualDetailsPageState
       mobileNumber: form.control(_mobileNumberKey).value,
       dateOfBirth: dobString,
       identifiers: [
-        identifier.copyWith(
-          identifierId: form.control(_idNumberKey).value,
-          identifierType: form.control(_idTypeKey).value,
-        ),
+        // identifier.copyWith(
+        //   identifierId: form.control(_idNumberKey).value,
+        //   identifierType: form.control(_idTypeKey).value,
+        // ),
       ],
     );
 
@@ -405,13 +405,13 @@ class _IndividualDetailsPageState
         validators: [Validators.required, CustomValidator.requiredMin],
         value: individual?.name?.givenName ?? searchQuery,
       ),
-      _idTypeKey: FormControl<String>(
-        validators: [Validators.required],
-        value: individual?.identifiers?.firstOrNull?.identifierType,
-      ),
-      _idNumberKey: FormControl<String>(
-        value: individual?.identifiers?.firstOrNull?.identifierId,
-      ),
+      // _idTypeKey: FormControl<String>(
+      //   validators: [Validators.required],
+      //   value: individual?.identifiers?.firstOrNull?.identifierType,
+      // ),
+      // _idNumberKey: FormControl<String>(
+      //   value: individual?.identifiers?.firstOrNull?.identifierId,
+      // ),
       _dobKey: FormControl<DateTime>(
         value: individual?.dateOfBirth != null
             ? DateFormat('dd/MM/yyyy').parse(

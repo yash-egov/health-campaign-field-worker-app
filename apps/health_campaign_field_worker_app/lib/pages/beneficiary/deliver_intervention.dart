@@ -37,9 +37,10 @@ class DeliverInterventionPage extends LocalizedStatefulWidget {
 
 class _DeliverInterventionPageState
     extends LocalizedState<DeliverInterventionPage> {
-  static const _resourceDeliveredKey = 'resourceDelivered';
+  // static const _resourceDeliveredKey = 'resourceDelivered';
   static const _quantityDistributedKey = 'quantityDistributed';
   static const _deliveryCommentKey = 'deliveryComment';
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +62,31 @@ class _DeliverInterventionPageState
                       ]),
                       footer: DigitElevatedButton(
                         onPressed: () {
+                          final formValue = form
+                              .control(
+                                'quantityDistributed',
+                              )
+                              .value;
+                          if (formValue != count) {
+                            setState(() {
+                              form.control(_deliveryCommentKey).setValidators(
+                                [Validators.required],
+                                updateParent: true,
+                                autoValidate: true,
+                              );
+                              form.control(_deliveryCommentKey).touched;
+                            });
+                          } else {
+                            form.markAsPristine();
+                            setState(() {
+                              form.control(_deliveryCommentKey).setValidators(
+                                [],
+                                updateParent: true,
+                                autoValidate: true,
+                              );
+                            });
+                          }
+
                           form.markAllAsTouched();
                           if (!form.valid) return;
                           DigitDialog.show(
@@ -111,6 +137,8 @@ class _DeliverInterventionPageState
                                                     )
                                                     .value
                                                     .toString(),
+
+                                                /// todo - fix after code freeze
                                                 productVariantId:
                                                     'PVAR-2023-01-11-000045',
                                                 deliveryComment: form
@@ -270,7 +298,7 @@ class _DeliverInterventionPageState
                                   localizations.translate(i18
                                       .deliverIntervention
                                       .noOfResourcesForDelivery): () {
-                                    final count = householdMemberWrapper
+                                    count = householdMemberWrapper
                                             .household.memberCount ??
                                         householdMemberWrapper.members.length;
 
@@ -279,22 +307,22 @@ class _DeliverInterventionPageState
                                 },
                               ),
                               const DigitDivider(),
-                              DigitDropdown<String>(
-                                label: localizations.translate(
-                                  i18.deliverIntervention
-                                      .resourceDeliveredLabel,
-                                ),
-                                valueMapper: (value) {
-                                  return localizations.translate(value);
-                                },
-                                menuItems: tempProductVariants
-                                    .map((e) => e.code)
-                                    .toList(),
-                                validationMessages: {
-                                  'required': (object) => 'Field is required',
-                                },
-                                formControlName: 'resourceDelivered',
-                              ),
+                              // DigitDropdown<String>(
+                              //   label: localizations.translate(
+                              //     i18.deliverIntervention
+                              //         .resourceDeliveredLabel,
+                              //   ),
+                              //   valueMapper: (value) {
+                              //     return localizations.translate(value);
+                              //   },
+                              //   menuItems: tempProductVariants
+                              //       .map((e) => e.code)
+                              //       .toList(),
+                              //   validationMessages: {
+                              //     'required': (object) => 'Field is required',
+                              //   },
+                              //   formControlName: 'resourceDelivered',
+                              // ),
                               DigitIntegerFormPicker(
                                 form: form,
                                 minimum: 0,
@@ -348,11 +376,11 @@ class _DeliverInterventionPageState
     final state = context.read<HouseholdOverviewBloc>().state;
 
     return fb.group(<String, Object>{
-      _resourceDeliveredKey: FormControl<String>(
-        value: state
-            .householdMemberWrapper.task?.resources?.first.productVariantId,
-        validators: [Validators.required],
-      ),
+      // _resourceDeliveredKey: FormControl<String>(
+      //   value: state
+      //       .householdMemberWrapper.task?.resources?.first.productVariantId,
+      //   validators: [Validators.required],
+      // ),
       _quantityDistributedKey: FormControl<int>(
         value: state.householdMemberWrapper.task?.resources?.first.quantity !=
                 null
