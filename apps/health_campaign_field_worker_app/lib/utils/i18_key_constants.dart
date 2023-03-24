@@ -387,6 +387,15 @@ class StockDetails {
 
   String get quantityDamagedLabel => 'STOCK_DETAILS_QUANTITY_DAMAGED';
 
+
+  /// Validation Messages
+  String get quantityReceivedValidation => 'STOCK_DETAILS_QUANTITY_RECEIVED_VALIDATION';
+  String get quantitySentValidation => 'STOCK_DETAILS_QUANTITY_SENT_VALIDATION';
+  String get quantityReturnedValidation => 'STOCK_DETAILS_QUANTITY_RETURNED_VALIDATION';
+  String get quantityIndicatedOnWaybillValidation => 'STOCK_DETAILS_QUANTITY_ON_WAYBILL_VALIDATION';
+  String get transportTypeValidation => 'TRANSPORT_TYPE_VALIDATION';
+  String get vehicleNumberValidation => 'VEHICLE_NUMBER_VALIDATION';
+
   /// Waybill number label
   String get waybillNumberLabel => 'STOCK_DETAILS_WAYBILL_NUMBER';
 
