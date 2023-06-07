@@ -13,6 +13,8 @@ import '../widgets/beneficiary/beneficiary_statistics_card.dart';
 import '../widgets/beneficiary/view_beneficiary_card.dart';
 import '../widgets/header/back_navigation_help_header.dart';
 import '../widgets/localized.dart';
+import '../widgets/showcase/custom_showcase_widget.dart';
+import '../widgets/showcase/showcase_constants.dart';
 
 class SearchBeneficiaryPage extends LocalizedStatefulWidget {
   const SearchBeneficiaryPage({
@@ -30,6 +32,7 @@ class _SearchBeneficiaryPageState
 
   @override
   Widget build(BuildContext context) {
+    final showcaseData = SearchBeneficiaryShowcaseData().showcaseData;
     final theme = Theme.of(context);
 
     return KeyboardVisibilityBuilder(
@@ -78,27 +81,33 @@ class _SearchBeneficiaryPageState
                           ],
                         ),
                       ),
-                      DigitSearchBar(
-                        controller: searchController,
-                        hintText: localizations.translate(
-                          i18.searchBeneficiary.beneficiarySearchHintText,
+                      CustomShowcaseWidget(
+                        message: localizations.translate(
+                          showcaseData[0].messageLocalizationKey,
                         ),
-                        textCapitalization: TextCapitalization.words,
-                        onChanged: (value) {
-                          final bloc = context.read<SearchHouseholdsBloc>();
-                          if (value.trim().length < 2) {
-                            bloc.add(const SearchHouseholdsClearEvent());
+                        showcaseKey: showcaseData[0].key,
+                        child: DigitSearchBar(
+                          controller: searchController,
+                          hintText: localizations.translate(
+                            i18.searchBeneficiary.beneficiarySearchHintText,
+                          ),
+                          textCapitalization: TextCapitalization.words,
+                          onChanged: (value) {
+                            final bloc = context.read<SearchHouseholdsBloc>();
+                            if (value.trim().length < 2) {
+                              bloc.add(const SearchHouseholdsClearEvent());
 
-                            return;
-                          }
+                              return;
+                            }
 
-                          bloc.add(
-                            SearchHouseholdsSearchByHouseholdHeadEvent(
-                              searchText: value.trim(),
-                              projectId: context.projectId,
-                            ),
-                          );
-                        },
+                            bloc.add(
+                              SearchHouseholdsSearchByHouseholdHeadEvent(
+                                searchText: value.trim(),
+                                projectId: context.projectId,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       const SizedBox(height: 16),
                       if (searchState.resultsNotFound)
@@ -176,12 +185,18 @@ class _SearchBeneficiaryPageState
                             ));
                           };
 
-                return DigitElevatedButton(
-                  onPressed: onPressed,
-                  child: Center(
-                    child: Text(localizations.translate(
-                      i18.searchBeneficiary.beneficiaryAddActionLabel,
-                    )),
+                return CustomShowcaseWidget(
+                  showcaseKey: showcaseData[1].key,
+                  message: localizations.translate(
+                    showcaseData[1].messageLocalizationKey,
+                  ),
+                  child: DigitElevatedButton(
+                    onPressed: onPressed,
+                    child: Center(
+                      child: Text(localizations.translate(
+                        i18.searchBeneficiary.beneficiaryAddActionLabel,
+                      )),
+                    ),
                   ),
                 );
               },

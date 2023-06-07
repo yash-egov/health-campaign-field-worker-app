@@ -34,6 +34,7 @@ class AuthenticatedPageWrapper extends StatelessWidget {
 
         return Portal(
           child: ShowCaseWidget(
+            disableBarrierInteraction: true,
             builder: Builder(builder: (context) {
               return Scaffold(
                 appBar: AppBar(

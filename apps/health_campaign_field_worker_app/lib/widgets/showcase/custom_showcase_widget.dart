@@ -54,13 +54,46 @@ class CustomShowcaseWidget extends StatelessWidget {
       key: showcaseKey,
       height: 100,
       width: MediaQuery.of(context).size.width,
+      disableMovingAnimation: true,
+      overlayOpacity: 0.6,
+      targetPadding: const EdgeInsets.all(8),
       container: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Material(
-          color: Colors.transparent,
-          child: Text(
-            message,
-            style: Theme.of(context).textTheme.bodyLarge,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                message,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      ShowCaseWidget.of(context).dismiss();
+                    },
+                    child: const Text('Skip'),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 2,
+                      ),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: () {
+                      ShowCaseWidget.of(context).next();
+                    },
+                    child: const Text('Next'),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
