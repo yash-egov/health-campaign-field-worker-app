@@ -9,6 +9,7 @@ import '../blocs/search_households/search_households.dart';
 import '../models/data_model.dart';
 import '../pages/acknowledgement.dart';
 import '../pages/authenticated.dart';
+import '../pages/beneficiary/beneficiary_view.dart';
 import '../pages/beneficiary/beneficiary_wrapper.dart';
 import '../pages/beneficiary/deliver_intervention.dart';
 import '../pages/beneficiary/household_overview.dart';
@@ -99,6 +100,10 @@ part 'app_router.gr.dart';
               page: HouseholdOverviewPage,
               path: 'overview',
               initial: true,
+            ),
+            AutoRoute(
+              page: BeneficiaryViewPage,
+              path: 'view',
             ),
             AutoRoute(
               page: DeliverInterventionPage,

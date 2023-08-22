@@ -283,6 +283,17 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    BeneficiaryViewRoute.name: (routeData) {
+      final args = routeData.argsAs<BeneficiaryViewRouteArgs>(
+          orElse: () => const BeneficiaryViewRouteArgs());
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: BeneficiaryViewPage(
+          key: args.key,
+          appLocalizations: args.appLocalizations,
+        ),
+      );
+    },
     DeliverInterventionRoute.name: (routeData) {
       final args = routeData.argsAs<DeliverInterventionRouteArgs>(
           orElse: () => const DeliverInterventionRouteArgs());
@@ -557,6 +568,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   HouseholdOverviewRoute.name,
                   path: 'overview',
+                  parent: BeneficiaryWrapperRoute.name,
+                ),
+                RouteConfig(
+                  BeneficiaryViewRoute.name,
+                  path: 'view',
                   parent: BeneficiaryWrapperRoute.name,
                 ),
                 RouteConfig(
@@ -1567,6 +1583,40 @@ class HouseholdOverviewRouteArgs {
   @override
   String toString() {
     return 'HouseholdOverviewRouteArgs{key: $key, appLocalizations: $appLocalizations}';
+  }
+}
+
+/// generated route for
+/// [BeneficiaryViewPage]
+class BeneficiaryViewRoute extends PageRouteInfo<BeneficiaryViewRouteArgs> {
+  BeneficiaryViewRoute({
+    Key? key,
+    AppLocalizations? appLocalizations,
+  }) : super(
+          BeneficiaryViewRoute.name,
+          path: 'view',
+          args: BeneficiaryViewRouteArgs(
+            key: key,
+            appLocalizations: appLocalizations,
+          ),
+        );
+
+  static const String name = 'BeneficiaryViewRoute';
+}
+
+class BeneficiaryViewRouteArgs {
+  const BeneficiaryViewRouteArgs({
+    this.key,
+    this.appLocalizations,
+  });
+
+  final Key? key;
+
+  final AppLocalizations? appLocalizations;
+
+  @override
+  String toString() {
+    return 'BeneficiaryViewRouteArgs{key: $key, appLocalizations: $appLocalizations}';
   }
 }
 

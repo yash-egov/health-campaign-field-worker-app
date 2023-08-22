@@ -11,6 +11,7 @@ class DigitTable extends StatelessWidget {
   final double leftColumnWidth;
   final double rightColumnWidth;
   final double? height;
+  final String? headerName;
 
   const DigitTable({
     Key? key,
@@ -19,6 +20,7 @@ class DigitTable extends StatelessWidget {
     required this.leftColumnWidth,
     required this.rightColumnWidth,
     this.height,
+    this.headerName,
   }) : super(key: key);
 
   List<Widget>? _getTitleWidget(ThemeData theme) {
@@ -158,29 +160,45 @@ class DigitTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: height,
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-        decoration: BoxDecoration(
-          border: Border.all(color: DigitTheme.instance.colorScheme.outline),
-          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-        ),
-        child: HorizontalDataTable(
-          leftHandSideColumnWidth: leftColumnWidth,
-          rightHandSideColumnWidth: rightColumnWidth,
-          isFixedHeader: true,
-          headerWidgets: _getTitleWidget(theme),
-          leftSideItemBuilder: _generateFirstColumnRow,
-          rightSideItemBuilder: _generateRightHandSideColumnRow,
-          itemCount: tableData.length,
-          rowSeparatorWidget: const Divider(
-            color: Colors.black54,
-            height: 1.0,
-            thickness: 0.0,
-          ),
-        ),
-      ),
+    return Column(
+      children: [
+        SizedBox(
+            height: 50,
+            child: Row(
+              children: [
+                headerName != null
+                    ? Text(
+                        headerName!,
+                        style: theme.textTheme.displayMedium,
+                      )
+                    : const Offstage(),
+              ],
+            )),
+        SizedBox(
+            height: height,
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              decoration: BoxDecoration(
+                border:
+                    Border.all(color: DigitTheme.instance.colorScheme.outline),
+                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+              ),
+              child: HorizontalDataTable(
+                leftHandSideColumnWidth: leftColumnWidth,
+                rightHandSideColumnWidth: rightColumnWidth,
+                isFixedHeader: true,
+                headerWidgets: _getTitleWidget(theme),
+                leftSideItemBuilder: _generateFirstColumnRow,
+                rightSideItemBuilder: _generateRightHandSideColumnRow,
+                itemCount: tableData.length,
+                rowSeparatorWidget: const Divider(
+                  color: Colors.black54,
+                  height: 1.0,
+                  thickness: 0.0,
+                ),
+              ),
+            ))
+      ],
     );
   }
 

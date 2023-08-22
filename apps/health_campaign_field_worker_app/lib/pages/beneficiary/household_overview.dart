@@ -502,8 +502,7 @@ class _HouseholdOverviewPageState
 
                             final projectId = context.projectId;
 
-                            await context.router
-                                .push(DeliverInterventionRoute());
+                            await context.router.push(BeneficiaryViewRoute());
 
                             bloc.add(
                               HouseholdOverviewReloadEvent(
