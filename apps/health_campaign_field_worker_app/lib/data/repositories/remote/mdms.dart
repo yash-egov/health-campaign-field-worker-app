@@ -140,6 +140,7 @@ class MdmsRepository {
         ..syncMethod = element.syncMethod
         ..syncTrigger = element.syncTrigger
         ..tenantId = element.tenantId
+        ..maxRadius = element.maxRadius
         ..backgroundServiceConfig = backgroundServiceConfig;
 
       final List<Languages> languageList = element.languages.map((element) {
@@ -341,6 +342,9 @@ class MdmsRepository {
       }).toList();
       newprojectType.cycles = element.cycles?.map((e) {
         final newcycle = Cycles()
+          ..id = e.id
+          ..startDate = e.startDate
+          ..endDate = e.endDate
           ..mandatoryWaitSinceLastCycleInDays =
               e.mandatoryWaitSinceLastCycleInDays
           ..deliveries = e.deliveries?.map((ele) {

@@ -245,6 +245,10 @@ class MemberCard extends StatelessWidget {
                         ),
                         buttonStyle: OutlinedButton.styleFrom(
                           backgroundColor: Colors.white,
+                          side: BorderSide(
+                            width: 1.0,
+                            color: theme.colorScheme.secondary,
+                          ),
                           minimumSize: Size(
                             MediaQuery.of(context).size.width / 1.15,
                             50,
@@ -261,6 +265,10 @@ class MemberCard extends StatelessWidget {
                                   ),
                                   buttonStyle: OutlinedButton.styleFrom(
                                     backgroundColor: Colors.white,
+                                    side: BorderSide(
+                                      width: 1.0,
+                                      color: theme.colorScheme.secondary,
+                                    ),
                                     minimumSize: Size(
                                       MediaQuery.of(context).size.width / 1.25,
                                       50,
@@ -334,6 +342,10 @@ class MemberCard extends StatelessWidget {
                                   ),
                                   buttonStyle: OutlinedButton.styleFrom(
                                     backgroundColor: Colors.white,
+                                    side: BorderSide(
+                                      width: 1.0,
+                                      color: theme.colorScheme.secondary,
+                                    ),
                                     minimumSize: Size(
                                       MediaQuery.of(context).size.width / 1.25,
                                       50,

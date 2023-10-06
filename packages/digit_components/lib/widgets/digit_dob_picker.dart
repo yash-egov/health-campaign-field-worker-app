@@ -15,6 +15,8 @@ class DigitDobPicker extends StatelessWidget {
   final String monthsHintLabel;
   final String separatorLabel;
   final String yearsAndMonthsErrMsg;
+  final String cancelText;
+  final String confirmText;
   final void Function(FormControl<dynamic>)? onChangeOfFormControl;
 
   const DigitDobPicker({
@@ -28,6 +30,8 @@ class DigitDobPicker extends StatelessWidget {
     required this.monthsHintLabel,
     required this.separatorLabel,
     required this.yearsAndMonthsErrMsg,
+    this.confirmText = 'OK',
+    this.cancelText = 'Cancel',
     this.onChangeOfFormControl,
   });
 
@@ -51,6 +55,8 @@ class DigitDobPicker extends StatelessWidget {
             DigitDateFormPicker(
               label: datePickerLabel,
               formControlName: datePickerFormControl,
+              cancelText: cancelText,
+              confirmText: confirmText,
               onChangeOfFormControl: onChangeOfFormControl,
               end: DateTime.now(),
             ),
@@ -138,7 +144,6 @@ class DobValueAccessor extends ControlValueAccessor<DateTime, DigitDOBAge> {
   @override
   DigitDOBAge? modelToViewValue(DateTime? modelValue) {
     if (modelValue == null) {
-      print('modelValue null');
       return null;
     } else {
       return DigitDateUtils.calculateAge(modelValue);

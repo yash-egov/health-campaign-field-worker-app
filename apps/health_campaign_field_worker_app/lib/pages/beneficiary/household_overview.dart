@@ -485,8 +485,11 @@ class _HouseholdOverviewPageState
                                                   ),
                                                 );
                                               },
-                                              isNotEligible:
-                                                  !checkEligibilityForAgeAndAdverseEvent(
+                                              isNotEligible: projectState
+                                                          .projectType
+                                                          ?.cycles !=
+                                                      null
+                                                  ? !checkEligibilityForAgeAndAdverseEvent(
                                                         DigitDOBAge(
                                                           years: ageInYears,
                                                           months: ageInMonths,
@@ -502,7 +505,8 @@ class _HouseholdOverviewPageState
                                                       !checkStatus(
                                                         taskdata,
                                                         currentCycle,
-                                                      ),
+                                                      )
+                                                  : false,
                                               // TODO Need to handle the null check
                                               name: e.name?.givenName ?? ' - ',
                                               years: (e.dateOfBirth == null
