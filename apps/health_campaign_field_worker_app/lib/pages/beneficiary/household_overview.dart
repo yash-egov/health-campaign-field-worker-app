@@ -409,7 +409,7 @@ class _HouseholdOverviewPageState
                                             final isBeneficiaryReferred =
                                                 checkIfBeneficiaryReferred(
                                               referralData,
-                                              currentCycle ?? Cycle(),
+                                              currentCycle ?? const Cycle(),
                                             );
 
                                             return MemberCard(

@@ -471,24 +471,26 @@ DoseCriteriaModel? fetchProductVariant(
   IndividualModel? individualModel,
 ) {
   if (currentDelivery != null && individualModel != null) {
-    final individualAge = DigitDateUtils.calculateAge(
-      DigitDateUtils.getFormattedDateToDateTime(
-            individualModel.dateOfBirth!,
-          ) ??
-          DateTime.now(),
-    );
-    final individualAgeInMonths =
-        individualAge.years * 12 + individualAge.months;
+    // final individualAge = DigitDateUtils.calculateAge(
+    //   DigitDateUtils.getFormattedDateToDateTime(
+    //         individualModel.dateOfBirth!,
+    //       ) ??
+    //       DateTime.now(),
+    // );
+    final weight =
+        int.parse(individualModel.additionalFields?.fields.first.value ?? 0);
+
+    // final individualAgeInMonths =
+    //     individualAge.years * 12 + individualAge.months;
     final filteredCriteria = currentDelivery.doseCriteria?.where((criteria) {
       final condition = criteria.condition;
       if (condition != null) {
         //{TODO: Expression package need to be parsed
-        final ageRange = condition.split("<=age<");
-        final minAge = int.parse(ageRange.first);
-        final maxAge = int.parse(ageRange.last);
+        final ageRange = condition.split("<=weight<");
+        final minweight = int.parse(ageRange.first);
+        final maxweight = int.parse(ageRange.last);
 
-        return individualAgeInMonths >= minAge &&
-            individualAgeInMonths <= maxAge;
+        return weight >= minweight && weight <= maxweight;
       }
 
       return false;

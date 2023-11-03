@@ -64,9 +64,9 @@ Widget buildTableContent(
               fraction: 2.5,
               element: {
                 localizations.translate(
-                  i18.beneficiaryDetails.beneficiaryAge,
+                  'Beneficiary Weight',
                   //[TODO: Condition need to be handled in generic way,]
-                ): '${fetchProductVariant(item, individualModel)?.condition?.split('<=age<').first} - ${fetchProductVariant(item, individualModel)?.condition?.split('<=age<').last} months',
+                ): '${fetchProductVariant(item, individualModel)?.condition?.split('<=weight<').first} - ${fetchProductVariant(item, individualModel)?.condition?.split('<=weight<').last} weight',
               },
             ),
             const Divider(),

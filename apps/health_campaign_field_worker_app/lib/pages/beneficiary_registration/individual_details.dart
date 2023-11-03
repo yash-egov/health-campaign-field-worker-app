@@ -43,6 +43,7 @@ class _IndividualDetailsPageState
   static const _dobKey = 'dob';
   static const _genderKey = 'gender';
   static const _mobileNumberKey = 'mobileNumber';
+  static const _heightKey = 'height';
   bool isDuplicateTag = false;
 
   @override
@@ -493,6 +494,17 @@ class _IndividualDetailsPageState
                           ),
                         ],
                       ),
+
+                      // TODO [Need to check]
+                      context.beneficiaryType.name.toString().toUpperCase() ==
+                              'INDIVIDUAL'
+                          ? DigitTextFormField(
+                              keyboardType: TextInputType.number,
+                              formControlName: _heightKey,
+                              label: localizations.translate('Weight'),
+                              maxLength: 10,
+                            )
+                          : const SizedBox(),
                       const SizedBox(height: 16),
                       BlocBuilder<ScannerBloc, ScannerState>(
                         builder: (context, state) => state.qrcodes.isNotEmpty
@@ -588,6 +600,12 @@ class _IndividualDetailsPageState
         lastModifiedBy: context.loggedInUserUuid,
         lastModifiedTime: context.millisecondsSinceEpoch(),
       ),
+      additionalFields: IndividualAdditionalFields(version: 1, fields: [
+        AdditionalField(
+          'height',
+          form.control(_heightKey).value,
+        ),
+      ]),
     );
 
     var name = individual.name;
@@ -704,6 +722,13 @@ class _IndividualDetailsPageState
                     );
               },
             ),
+      ),
+      _heightKey: FormControl<String>(
+        value: individual?.additionalFields?.fields.first.value ?? "95",
+        // TODO : need to check
+        validators: context.beneficiaryType.name.toUpperCase() == 'INDIVIDUAL'
+            ? []
+            : [Validators.required],
       ),
       _mobileNumberKey:
           FormControl<String>(value: individual?.mobileNumber, validators: [

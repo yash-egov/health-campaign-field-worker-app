@@ -358,20 +358,20 @@ class _DeliverInterventionPageState
                                                           .deliverIntervention
                                                           .currentCycle),
                                                 ),
-                                                DigitStepper(
-                                                  activeStep:
-                                                      deliveryInterventionstate
-                                                              .dose -
-                                                          1,
-                                                  stepRadius: 12.5,
-                                                  steps: steps,
-                                                  maxStepReached: 3,
-                                                  lineLength:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          steps.length,
-                                                ),
+                                                // DigitStepper(
+                                                //   activeStep:
+                                                //       deliveryInterventionstate
+                                                //               .dose -
+                                                //           1,
+                                                //   stepRadius: 12.5,
+                                                //   steps: steps,
+                                                //   maxStepReached: 3,
+                                                //   lineLength:
+                                                //       MediaQuery.of(context)
+                                                //               .size
+                                                //               .width /
+                                                //           steps.length,
+                                                // ),
                                                 DigitDateFormPicker(
                                                   isEnabled: false,
                                                   formControlName:

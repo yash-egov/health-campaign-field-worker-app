@@ -302,10 +302,77 @@ class MdmsRepository {
     Map<String, dynamic> body,
   ) async {
     try {
-      final response = await _client.post(apiEndPoint, data: body);
+      // await _client.post(apiEndPoint, data: body);
+
+      final response = {
+        "HCM-PROJECT-TYPES": {
+          "projectTypes": [
+            {
+              "id": "644c4356-5214-11ee-be56-0242ac120002",
+              "name": "configuration for Multi Round Campaigns",
+              "code": "MR-DN",
+              "group": "MALARIA",
+              "beneficiaryType": "INDIVIDUAL",
+              "resources": [
+                {
+                  "productVariantId": "PVAR-2023-10-31-000047",
+                  "isBaseUnitVariant": false,
+                },
+              ],
+              "observationStrategy": "DOT1",
+              "validMinAge": 60,
+              "validMaxAge": 12000,
+              "cycles": [
+                {
+                  "mandatoryWaitSinceLastCycleInDays": null,
+                  "startDate": 1698258600000,
+                  "endDate": 1698517800000,
+                  "id": 1,
+                  "deliveries": [
+                    {
+                      "id": 1,
+                      "deliveryStrategy": "DIRECT",
+                      "mandatoryWaitSinceLastDeliveryInDays": null,
+                      "doseCriteria": [
+                        {
+                          "condition": "26<=weight<44",
+                          "ProductVariants": [
+                            {
+                              "productVariantId": "PVAR-2023-10-31-000047",
+                              "quantity": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "condition": "45<=weight<64",
+                          "ProductVariants": [
+                            {
+                              "productVariantId": "PVAR-2023-10-31-000047",
+                              "quantity": 2,
+                            },
+                          ],
+                        },
+                        {
+                          "condition": "65<=weight<140",
+                          "ProductVariants": [
+                            {
+                              "productVariantId": "PVAR-2023-10-31-000047",
+                              "quantity": 3,
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      };
 
       return ProjectTypePrimaryWrapper.fromJson(
-        json.decode(response.toString())['MdmsRes'],
+        response,
       );
     } catch (_) {
       rethrow;

@@ -100,6 +100,11 @@ class IndividualLocalRepository
             mobileNumber: individual.mobileNumber,
             isDeleted: individual.isDeleted,
             rowVersion: individual.rowVersion,
+            additionalFields: individual.additionalFields == null
+                ? null
+                : Mapper.fromJson<IndividualAdditionalFields>(
+                    individual.additionalFields!,
+                  ),
             clientAuditDetails: (individual.clientCreatedBy != null &&
                     individual.clientCreatedTime != null)
                 ? ClientAuditDetails(

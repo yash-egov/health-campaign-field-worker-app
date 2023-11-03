@@ -352,14 +352,14 @@ class _DoseAdministeredPageState extends LocalizedState<DoseAdministeredPage> {
                                     topPadding: const EdgeInsets.only(top: 4.0),
                                     element: {
                                       localizations.translate(
-                                        i18.beneficiaryDetails.beneficiaryAge,
+                                        'Beneficiary Weight',
                                       ): '${fetchProductVariant(
                                         deliveryState.futureDeliveries?.first,
                                         overViewBloc.selectedIndividual,
-                                      )?.condition?.split('<=age<').first} - ${fetchProductVariant(
+                                      )?.condition?.split('<=weight<').first} - ${fetchProductVariant(
                                         deliveryState.futureDeliveries?.first,
                                         overViewBloc.selectedIndividual,
-                                      )?.condition?.split('<=age<').last} months',
+                                      )?.condition?.split('<=weight<').last} weight',
                                     },
                                     //[TODO:: Need to parse <=age< as an Expression
                                   ),
