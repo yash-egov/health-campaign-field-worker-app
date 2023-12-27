@@ -15,7 +15,6 @@ import 'blocs/project/project.dart';
 import 'blocs/scanner/scanner.dart';
 import 'blocs/user/user.dart';
 import 'data/data_repository.dart';
-import 'data/local_store/app_shared_preferences.dart';
 import 'data/local_store/sql_store/sql_store.dart';
 import 'data/network_manager.dart';
 import 'data/repositories/remote/localization.dart';
@@ -229,9 +228,6 @@ class MainApplicationState extends State<MainApplication>
                       ],
                       child: BlocBuilder<LocalizationBloc, LocalizationState>(
                         builder: (context, langState) {
-                          final selectedLocale =
-                              AppSharedPreferences().getSelectedLocale;
-
                           return MaterialApp.router(
                             debugShowCheckedModeBanner: false,
                             builder: (context, child) {
@@ -276,8 +272,14 @@ class MainApplicationState extends State<MainApplication>
                             ],
                             locale: languages != null
                                 ? Locale(
-                                    selectedLocale.split("_").first,
-                                    selectedLocale.split("_").last,
+                                    languages[langState.index]
+                                        .value
+                                        .split('_')
+                                        .first,
+                                    languages[langState.index]
+                                        .value
+                                        .split('_')
+                                        .last,
                                   )
                                 : defaultLocale,
                             theme: DigitTheme.instance.mobileTheme,

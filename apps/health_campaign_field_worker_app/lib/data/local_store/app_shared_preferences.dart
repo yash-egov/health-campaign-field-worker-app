@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {
   static const String isFirstLaunchKey = 'isFirstLaunch';
-  static const String userSelectedLocale = 'userSelectedLocale';
 
   SharedPreferences? _sharedPreferences;
 
@@ -29,20 +28,10 @@ class AppSharedPreferences {
 
   bool get isFirstLaunch => sharedPreferences.getBool(isFirstLaunchKey) ?? true;
 
-  String get getSelectedLocale => sharedPreferences.getString(userSelectedLocale) ?? "en_IN";
-
   Future<void> appLaunchedFirstTime() async {
     await sharedPreferences.setBool(
       isFirstLaunchKey,
       false,
     );
   }
-
-  Future<void> setSelectedLocale(String localeString) async {
-    await sharedPreferences.setString(
-      userSelectedLocale,
-      localeString,
-    );
-  }
-
 }
