@@ -82,8 +82,8 @@ class _ViewBeneficiaryCardState extends LocalizedState<ViewBeneficiaryCard> {
     final currentCycle =
         RegistrationDeliverySingleton().projectType?.cycles?.firstWhereOrNull(
               (e) =>
-                  (e.startDate!) < DateTime.now().millisecondsSinceEpoch &&
-                  (e.endDate!) > DateTime.now().millisecondsSinceEpoch,
+                  (e.startDate) < DateTime.now().millisecondsSinceEpoch &&
+                  (e.endDate) > DateTime.now().millisecondsSinceEpoch,
               // Return null when no matching cycle is found
             );
 

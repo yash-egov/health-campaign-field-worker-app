@@ -326,9 +326,7 @@ class _RecordReferralDetailsPageState
                                                                   .toValue(),
                                                               dateOfEvaluation,
                                                             ),
-                                                          if (nameOfChild !=
-                                                                  null &&
-                                                              nameOfChild
+                                                          if (nameOfChild
                                                                   .toString()
                                                                   .trim()
                                                                   .isNotEmpty)
@@ -338,8 +336,7 @@ class _RecordReferralDetailsPageState
                                                                   .toValue(),
                                                               nameOfChild,
                                                             ),
-                                                          if (age != null &&
-                                                              age
+                                                          if (age
                                                                   .toString()
                                                                   .trim()
                                                                   .isNotEmpty)
@@ -349,8 +346,7 @@ class _RecordReferralDetailsPageState
                                                                   .toValue(),
                                                               age,
                                                             ),
-                                                          if (gender != null &&
-                                                              gender
+                                                          if (gender
                                                                   .toString()
                                                                   .trim()
                                                                   .isNotEmpty)
@@ -666,9 +662,7 @@ class _RecordReferralDetailsPageState
                                                                     .toValue(),
                                                                 dateOfEvaluation,
                                                               ),
-                                                            if (nameOfChild !=
-                                                                    null &&
-                                                                nameOfChild
+                                                            if (nameOfChild
                                                                     .toString()
                                                                     .trim()
                                                                     .isNotEmpty)
@@ -678,8 +672,7 @@ class _RecordReferralDetailsPageState
                                                                     .toValue(),
                                                                 nameOfChild,
                                                               ),
-                                                            if (age != null &&
-                                                                age
+                                                            if (age
                                                                     .toString()
                                                                     .trim()
                                                                     .isNotEmpty)
@@ -689,9 +682,7 @@ class _RecordReferralDetailsPageState
                                                                     .toValue(),
                                                                 age,
                                                               ),
-                                                            if (gender !=
-                                                                    null &&
-                                                                gender
+                                                            if (gender
                                                                     .toString()
                                                                     .trim()
                                                                     .isNotEmpty)

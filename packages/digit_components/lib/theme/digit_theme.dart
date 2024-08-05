@@ -32,7 +32,7 @@ class DigitTheme {
     return ThemeData(
       colorScheme: colorScheme,
       useMaterial3: false,
-      scaffoldBackgroundColor: colorScheme.background,
+      scaffoldBackgroundColor: colorScheme.surface,
       textTheme: mobileTypography.textTheme,
       appBarTheme: const AppBarTheme(elevation: 0),
       elevatedButtonTheme: elevatedButtonTheme,
@@ -52,8 +52,6 @@ class DigitTheme {
         onSecondary: colors.white,
         error: colors.lavaRed,
         onError: colors.white,
-        background: colors.seaShellGray,
-        onBackground: colors.woodsmokeBlack,
         surface: colors.alabasterWhite,
         onSurface: colors.woodsmokeBlack,
         onSurfaceVariant: colors.darkSpringGreen,
@@ -64,6 +62,7 @@ class DigitTheme {
         shadow: colors.davyGray,
         tertiary: colors.paleRose,
         onTertiaryContainer: colors.curiousBlue,
+        background: Colors.black, onBackground: Colors.black, //#
       );
 
   EdgeInsets get buttonPadding => const EdgeInsets.symmetric(

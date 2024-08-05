@@ -38,7 +38,7 @@ class DigitRowCard extends StatelessWidget {
                       border: Border.all(
                         color: e.isSelected
                             ? theme.colorScheme.secondary
-                            : theme.colorScheme.onBackground,
+                            : theme.colorScheme.onSurface,
                       ),
                       color: e.isSelected
                           ? theme.colorScheme.secondary
@@ -51,7 +51,7 @@ class DigitRowCard extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: e.isSelected
                               ? theme.colorScheme.onSecondary
-                              : theme.colorScheme.onBackground,
+                              : theme.colorScheme.onSurface,
                         ),
                         overflow: TextOverflow.ellipsis,
                         softWrap: false,

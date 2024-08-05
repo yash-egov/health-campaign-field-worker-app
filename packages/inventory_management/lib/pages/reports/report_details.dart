@@ -21,7 +21,6 @@ import '../../models/entities/stock.dart';
 import '../../models/entities/stock_reconciliation.dart';
 import '../../utils/utils.dart';
 import '../../widgets/back_navigation_help_header.dart';
-import '../facility_selection.dart';
 
 @RoutePage()
 class InventoryReportDetailsPage extends LocalizedStatefulWidget {
@@ -226,8 +225,9 @@ class _InventoryReportDetailsPageState
                                                                     facilities))
                                                         as FacilityModel?;
 
-                                                    if (facility == null)
+                                                    if (facility == null) {
                                                       return;
+                                                    }
                                                     form
                                                             .control(_facilityKey)
                                                             .value =
@@ -284,8 +284,9 @@ class _InventoryReportDetailsPageState
                                                                         facilities))
                                                             as FacilityModel?;
 
-                                                        if (facility == null)
+                                                        if (facility == null) {
                                                           return;
+                                                        }
                                                         form
                                                                 .control(
                                                                     _facilityKey)

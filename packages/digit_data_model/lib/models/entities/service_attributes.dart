@@ -4,7 +4,6 @@ import 'package:drift/drift.dart';
 
 import 'package:digit_data_model/data_model.dart';
 
-import '../../data/local_store/sql_store/sql_store.dart';
 
 part 'service_attributes.mapper.dart';
 
@@ -34,10 +33,10 @@ class ServiceAttributesModel extends EntityModel with ServiceAttributesModelMapp
   static const schemaName = 'ServiceAttributes';
 
   final String? attributeCode;
-  final dynamic? value;
+  final dynamic value;
   final String? dataType;
   final String? referenceId;
-  final dynamic? additionalDetails;
+  final dynamic additionalDetails;
   final bool? nonRecoverableError;
   final String clientReferenceId;
   final String? tenantId;

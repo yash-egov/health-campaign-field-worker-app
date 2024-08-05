@@ -452,7 +452,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                       TextButton(
                                         style: TextButton.styleFrom(
                                           foregroundColor:
-                                              theme.colorScheme.onBackground,
+                                              theme.colorScheme.onSurface,
                                           tapTargetSize:
                                               MaterialTapTargetSize.shrinkWrap,
                                         ),

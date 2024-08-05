@@ -25,7 +25,7 @@ class DigitIconButton extends StatelessWidget {
     final theme = Theme.of(context);
     return TextButton(
       style: TextButton.styleFrom(
-        foregroundColor: theme.colorScheme.onBackground,
+        foregroundColor: theme.colorScheme.onSurface,
         padding: EdgeInsets.zero,
       ),
       onPressed: onPressed,

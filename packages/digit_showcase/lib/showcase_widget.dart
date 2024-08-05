@@ -59,7 +59,7 @@ class ShowcaseWidget extends StatefulWidget {
   /// Enable/disable showcase globally. Enabled by default.
   final bool enableShowcase;
 
-  const ShowcaseWidget({
+  const ShowcaseWidget({super.key, 
     required this.builder,
     this.onFinish,
     this.onStart,

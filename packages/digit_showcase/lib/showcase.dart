@@ -302,6 +302,7 @@ class Showcase extends StatefulWidget {
   final VoidCallback? onBarrierClick;
 
   const Showcase({
+    // super.key,
     required this.key,
     required this.description,
     required this.child,
@@ -356,6 +357,7 @@ class Showcase extends StatefulWidget {
             "onTargetClick is required if you're using disposeOnTap");
 
   const Showcase.withWidget({
+    // super.key,
     required this.key,
     required this.height,
     required this.width,

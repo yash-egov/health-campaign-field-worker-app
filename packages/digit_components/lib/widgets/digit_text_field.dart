@@ -112,7 +112,7 @@ class DigitTextField extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: isDisabled
                   ? const DigitColors().cloudGray
-                  : DigitTheme.instance.colorScheme.onBackground),
+                  : DigitTheme.instance.colorScheme.onSurface),
           prefixIcon: prefixIcon ??
               (prefixText == ''
                   ? null
@@ -126,7 +126,7 @@ class DigitTextField extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             color: isDisabled
                                 ? const DigitColors().cloudGray
-                                : DigitTheme.instance.colorScheme.onBackground),
+                                : DigitTheme.instance.colorScheme.onSurface),
                       ),
                     )),
         ),

@@ -50,13 +50,12 @@ class CustomValidator {
         control.value.toString().length < 10) {
       return {'minLength': true};
     }
+    return null;
   }
 }
 
 bool checkStatus(List<TaskModel>? tasks, ProjectCycle? currentCycle) {
-  if (currentCycle == null ||
-      currentCycle.startDate == null ||
-      currentCycle.endDate == null) {
+  if (currentCycle == null) {
     return false;
   }
 
@@ -106,13 +105,11 @@ bool checkEligibilityForAgeAndSideEffect(
   int totalAgeMonths = age.years * 12 + age.months;
   final currentCycle = projectType?.cycles?.firstWhereOrNull(
     (e) =>
-        (e.startDate!) < DateTime.now().millisecondsSinceEpoch &&
-        (e.endDate!) > DateTime.now().millisecondsSinceEpoch,
+        (e.startDate) < DateTime.now().millisecondsSinceEpoch &&
+        (e.endDate) > DateTime.now().millisecondsSinceEpoch,
     // Return null when no matching cycle is found
   );
-  if (currentCycle != null &&
-      currentCycle.startDate != null &&
-      currentCycle.endDate != null) {
+  if (currentCycle != null) {
     bool recordedSideEffect = false;
     if ((tasks != null) && sideEffects != null && sideEffects.isNotEmpty) {
       final lastTaskTime =
@@ -120,8 +117,8 @@ bool checkEligibilityForAgeAndSideEffect(
               ? tasks.clientAuditDetails?.createdTime
               : null;
       recordedSideEffect = lastTaskTime != null &&
-          (lastTaskTime >= currentCycle.startDate! &&
-              lastTaskTime <= currentCycle.endDate!);
+          (lastTaskTime >= currentCycle.startDate &&
+              lastTaskTime <= currentCycle.endDate);
 
       return projectType?.validMinAge != null &&
               projectType?.validMaxAge != null
@@ -148,9 +145,7 @@ bool recordedSideEffect(
   TaskModel? task,
   List<SideEffectModel>? sideEffects,
 ) {
-  if (selectedCycle != null &&
-      selectedCycle.startDate != null &&
-      selectedCycle.endDate != null) {
+  if (selectedCycle != null) {
     if ((task != null) && (sideEffects ?? []).isNotEmpty) {
       final lastTaskCreatedTime =
           task.clientReferenceId == sideEffects?.last.taskClientReferenceId
