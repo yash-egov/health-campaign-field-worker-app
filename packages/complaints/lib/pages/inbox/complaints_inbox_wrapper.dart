@@ -15,8 +15,19 @@ class ComplaintsInboxWrapperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Hii");
-
+    // return Text("Hii");
+    return BlocProvider(
+      create: (context) => ComplaintsInboxBloc(
+        const ComplaintInboxState.complaints(),
+        pgrRepository:
+        context.repository<PgrServiceModel, PgrServiceSearchModel>(context),
+      )..add(
+        ComplaintInboxLoadComplaintsEvent(
+          createdByUserId: ComplaintsSingleton().loggedInUserUuid,
+        ),
+      ),
+      child: const AutoRouter(),
+    );
 
   }
 }

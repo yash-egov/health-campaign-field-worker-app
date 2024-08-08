@@ -21,6 +21,7 @@ dependencies:
   reactive_forms: ^14.1.0
   recase: ^4.1.0
   flutter_dotenv: ^5.0.2
+  flutter_svg: ^2.0.8
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/icons/svg/
 
   # To add assets to your package, add an assets section, like this:
   # assets:
