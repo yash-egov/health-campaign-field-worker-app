@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:complaints/router/complaints_router.gm.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +53,7 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.only(
-                          left: kPadding*2,
+                          left: kPadding * 2,
                           bottom: kPadding,
                         ),
                         child: Text(
@@ -71,7 +72,8 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                             TextButton(
                               style: TextButton.styleFrom(
                                 foregroundColor: theme.colorScheme.secondary,
-                                padding: const EdgeInsets.only(left: kPadding*2),
+                                padding:
+                                    const EdgeInsets.only(left: kPadding * 2),
                               ),
                               onPressed: () {
                                 // router.push(ComplaintsInboxSearchRoute());
@@ -79,7 +81,9 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                               child: Row(
                                 children: [
                                   const Icon(Icons.search),
-                                  const SizedBox(width: 5,),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
                                   Text(localizations.translate(
                                     i18.complaints.searchCTA,
                                   )),
@@ -97,7 +101,9 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                               child: Row(
                                 children: [
                                   const Icon(Icons.filter_list_alt),
-                                  const SizedBox(width: 5,),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
                                   Text(localizations.translate(
                                     i18.complaints.filterCTA,
                                   )),
@@ -107,7 +113,8 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                             TextButton(
                               style: TextButton.styleFrom(
                                 foregroundColor: theme.colorScheme.secondary,
-                                padding: const EdgeInsets.only(right: kPadding*2),
+                                padding:
+                                    const EdgeInsets.only(right: kPadding * 2),
                               ),
                               onPressed: () {
                                 // router.push(ComplaintsInboxSortRoute());
@@ -115,7 +122,9 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                               child: Row(
                                 children: [
                                   const Icon(Icons.segment),
-                                  const SizedBox(width: 5,),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
                                   Text(localizations.translate(
                                     i18.complaints.sortCTA,
                                   )),
@@ -162,35 +171,36 @@ class _ComplaintsInboxPageState extends LocalizedState<ComplaintsInboxPage> {
                   margin: const EdgeInsets.fromLTRB(0, kPadding, 0, 0),
                   padding: const EdgeInsets.fromLTRB(kPadding, 0, kPadding, 0),
                   child: DigitElevatedButton(
-                      onPressed: () async {
-                        var loggedInUserUuid = ComplaintsSingleton().loggedInUserUuid;
-                        final bloc = context.read<ComplaintsInboxBloc>();
+                    onPressed: () async {
+                      var loggedInUserUuid =
+                          ComplaintsSingleton().loggedInUserUuid;
+                      final bloc = context.read<ComplaintsInboxBloc>();
+                      print("Yash Clicking File Complaint");
+                      await router.push(
+                        ComplaintsRegistrationWrapperRoute(),
+                      );
 
-                        // await router.push(
-                        //   // ComplaintsRegistrationWrapperRoute(),
-                        // );
-
-                        try {
-                          bloc.add(
-                            ComplaintInboxLoadComplaintsEvent(
-                              createdByUserId: loggedInUserUuid,
-                            ),
-                          );
-                        } catch (error) {
-                          AppLogger.instance.error(
-                            title: 'Error',
-                            message: 'Error while loading complaints',
-                          );
-                        }
-                      },
-                      child: Center(
-                        child: Text(
-                          localizations.translate(
-                            i18.complaints.fileComplaintAction,
+                      try {
+                        bloc.add(
+                          ComplaintInboxLoadComplaintsEvent(
+                            createdByUserId: loggedInUserUuid,
                           ),
+                        );
+                      } catch (error) {
+                        AppLogger.instance.error(
+                          title: 'Error',
+                          message: 'Error while loading complaints',
+                        );
+                      }
+                    },
+                    child: Center(
+                      child: Text(
+                        localizations.translate(
+                          i18.complaints.fileComplaintAction,
                         ),
                       ),
                     ),
+                  ),
                 ),
               ),
             ],
@@ -336,7 +346,7 @@ class _ComplaintsInboxItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: kPadding*2),
+            padding: const EdgeInsets.only(top: kPadding * 2),
             child: Row(
               children: [
                 Expanded(
@@ -357,9 +367,13 @@ class _ComplaintsInboxItem extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      "Hiii",
+                      "open",
                       // localizations.translate(i18.searchBeneficiary.iconLabel),
-                      // style: DigitTheme.instance.mobileTheme.textTheme.headlineSmall?.apply(color: theme.colorScheme.secondary,),
+                      style: DigitTheme
+                          .instance.mobileTheme.textTheme.headlineSmall
+                          ?.apply(
+                        color: theme.colorScheme.secondary,
+                      ),
                     ),
                   ),
                 ),

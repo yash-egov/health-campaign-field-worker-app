@@ -248,21 +248,21 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ComplaintsRegistrationWrapperRoute.page,
           path: 'complaints-registration',
-          children: [
-            AutoRoute(
-              page: ComplaintTypeRoute.page,
-              path: 'complaints-type',
-              initial: true,
-            ),
-            AutoRoute(
-              page: ComplaintsLocationRoute.page,
-              path: 'complaints-location',
-            ),
-            AutoRoute(
-              page: ComplaintsDetailsRoute.page,
-              path: 'complaints-details',
-            ),
-          ],
+          // children: [
+          //   AutoRoute(
+          //     page: ComplaintTypeRoute.page,
+          //     path: 'complaints-type',
+          //     initial: true,
+          //   ),
+          //   AutoRoute(
+          //     page: ComplaintsLocationRoute.page,
+          //     path: 'complaints-location',
+          //   ),
+          //   AutoRoute(
+          //     page: ComplaintsDetailsRoute.page,
+          //     path: 'complaints-details',
+          //   ),
+          // ],
         ),
 
         // Attendance Route

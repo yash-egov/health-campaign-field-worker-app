@@ -1,13 +1,15 @@
 // GENERATED using mason_cli
 import 'dart:async';
 
+import 'package:complaints/models/complaints.dart';
+import 'package:complaints/utils/utils.dart';
 import 'package:digit_data_model/data_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../models/complaints/complaints.dart';
-import '../../models/entities/additional_fields_type.dart';
-import '../../utils/environment_config.dart';
+// import '../../models/complaints/complaints.dart';
+// import '../../models/entities/additional_fields_type.dart';
+// import '../../utils/environment_config.dart';
 import '../../utils/typedefs.dart';
 
 part 'complaints_registration.freezed.dart';
@@ -125,13 +127,14 @@ class ComplaintsRegistrationBloc
 
         final pgrServiceModel = PgrServiceModel(
             clientReferenceId: referenceId,
-            tenantId: envConfig.variables.tenantId,
+            tenantId: ComplaintsSingleton().tenantId,
             serviceCode: serviceCode,
             description: description,
-            source: AdditionalFieldsType.mobile.toValue(),
+            source: "Hi",
+            //  AdditionalFieldsType.mobile.toValue(),
             applicationStatus: PgrServiceApplicationStatus.created,
             user: PgrComplainantModel(
-              tenantId: envConfig.variables.tenantId,
+              tenantId: ComplaintsSingleton().tenantId,
               clientReferenceId: IdGen.i.identifier,
               complaintClientReferenceId: referenceId,
               name: complaintDetailsModel.complainantName,
@@ -145,7 +148,8 @@ class ComplaintsRegistrationBloc
               ),
               uuid: event.userId,
               userName: complaintDetailsModel.complainantContactNumber,
-              type: AdditionalFieldsType.employee.toValue(),
+              type: "Hi",
+              // AdditionalFieldsType.employee.toValue(),
             ),
             address: address.copyWith(
               relatedClientReferenceId: referenceId,

@@ -10,9 +10,9 @@ extension ContextUtilityExtensions on BuildContext {
   }
 
   DataRepository<D, R>
-  repository<D extends EntityModel, R extends EntitySearchModel>(
-      BuildContext context,
-      ) {
+      repository<D extends EntityModel, R extends EntitySearchModel>(
+    BuildContext context,
+  ) {
     switch (ComplaintsSingleton().persistenceConfiguration) {
       case PersistenceConfiguration.offlineFirst:
         return context.read<LocalRepository<D, R>>();
@@ -24,5 +24,4 @@ extension ContextUtilityExtensions on BuildContext {
   }
 
   // String get loggedInUserUuid => loggedInUser.uuid;
-
 }

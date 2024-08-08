@@ -66,12 +66,8 @@ getAppLocalizationDelegates({
       ),
       appConfig.languages!,
     ),
-    complaints_localization.ComplaintsLocalization
-        .getDelegate(
-      getLocalizationString(
-          isar,
-          selectedLocale
-      ),
+    complaints_localization.ComplaintsLocalization.getDelegate(
+      getLocalizationString(isar, selectedLocale),
       appConfig.languages!,
     ),
   ];

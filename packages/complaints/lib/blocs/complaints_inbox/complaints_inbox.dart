@@ -31,6 +31,7 @@ class ComplaintsInboxBloc
     ComplaintInboxLoadComplaintsEvent event,
     ComplaintsInboxEmitter emit,
   ) async {
+    print(" Yash Loading Complaints ");
     if (event.updatedModels != null) {
       emit(state.copyWith(
         complaints: event.updatedModels!,
@@ -43,19 +44,19 @@ class ComplaintsInboxBloc
     List<PgrServiceModel> complaints = [];
     emit(state.copyWith(loading: true));
     if (pgrRepository is PgrServiceLocalRepository) {
+      print(" Yash Loading Complaints Locally");
       complaints = await (pgrRepository as PgrServiceLocalRepository).search(
         PgrServiceSearchModel(
-          // tenantId: envConfig.variables.tenantId,
-          tenantId: ComplaintsSingleton().tenantId
-        ),
+            // tenantId: envConfig.variables.tenantId,
+            tenantId: ComplaintsSingleton().tenantId),
         event.createdByUserId,
       );
     } else if (pgrRepository is PgrServiceRemoteRepository) {
+      print(" Yash Loading Complaints Remotely");
       complaints = await pgrRepository.search(
         PgrServiceSearchModel(
-          // tenantId: envConfig.variables.tenantId,
-          tenantId: ComplaintsSingleton().tenantId
-        ),
+            // tenantId: envConfig.variables.tenantId,
+            tenantId: ComplaintsSingleton().tenantId),
       );
     }
 

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:complaints/pages/registration/complaints_registration_wrapper.dart';
 
 import 'complaints_router.gm.dart';
 
@@ -8,7 +9,7 @@ class ComplaintsRoute extends $ComplaintsRoute {
   RouteType get defaultRouteType => const RouteType.material();
 
   @override
-  List<AutoRoute> routes =[
+  List<AutoRoute> routes = [
     /// Complaints Inbox
     AutoRoute(
       page: ComplaintsInboxWrapperRoute.page,
@@ -19,25 +20,34 @@ class ComplaintsRoute extends $ComplaintsRoute {
           path: 'complaints-inbox-items',
           initial: true,
         ),
-      //   AutoRoute(
-      //     page: ComplaintsInboxFilterRoute.page,
-      //     path: 'complaints-inbox-filter',
-      //   ),
-      //   AutoRoute(
-      //     page: ComplaintsInboxSearchRoute.page,
-      //     path: 'complaints-inbox-search',
-      //   ),
-      //   AutoRoute(
-      //     page: ComplaintsInboxSortRoute.page,
-      //     path: 'complaints-inbox-sort',
-      //   ),
-      //   AutoRoute(
-      //     page: ComplaintsDetailsViewRoute.page,
-      //     path: 'complaints-inbox-view-details',
-      //   ),
+        //   AutoRoute(
+        //     page: ComplaintsInboxFilterRoute.page,
+        //     path: 'complaints-inbox-filter',
+        //   ),
+        //   AutoRoute(
+        //     page: ComplaintsInboxSearchRoute.page,
+        //     path: 'complaints-inbox-search',
+        //   ),
+        //   AutoRoute(
+        //     page: ComplaintsInboxSortRoute.page,
+        //     path: 'complaints-inbox-sort',
+        //   ),
+        //   AutoRoute(
+        //     page: ComplaintsDetailsViewRoute.page,
+        //     path: 'complaints-inbox-view-details',
+        //   ),
       ],
     ),
-
+    AutoRoute(
+      page: ComplaintsRegistrationWrapperRoute.page,
+      path: 'complaints-registration',
+      // children: [
+      //   AutoRoute(
+      //     page: ComplaintsInboxRoute.page,
+      //     path: 'complaints-inbox-items',
+      //     initial: true,
+      //   ),
+      // ],
+    )
   ];
-
 }
