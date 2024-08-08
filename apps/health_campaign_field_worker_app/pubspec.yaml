@@ -72,7 +72,7 @@ dependencies:
   digit_data_model: ^1.0.2
   registration_delivery: ^1.0.2
   complaints:
-    path: /home/admin1/flutter-projects/health-campaign-field-worker-app/packages/complaints
+    path: /home/admin1/Documents/Flutter Development/health_campaign_field_worker_app/packages/complaints
 
 
 dev_dependencies:
