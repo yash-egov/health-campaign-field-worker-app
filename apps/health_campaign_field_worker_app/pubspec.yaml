@@ -71,6 +71,9 @@ dependencies:
   referral_reconciliation: ^1.0.2
   digit_data_model: ^1.0.2
   registration_delivery: ^1.0.2
+  complaints:
+    path: /home/admin1/flutter-projects/health-campaign-field-worker-app/packages/complaints
+
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +95,8 @@ dev_dependencies:
 
 dependency_overrides:
   intl: ^0.18.0
+  digit_firebase_services:
+    path: ../../packages/digit_firebase_services
 
 flutter_icons:
   android: 'ic_launcher'
