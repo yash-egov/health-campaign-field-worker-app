@@ -11,6 +11,8 @@ import 'package:referral_reconciliation/router/referral_reconciliation_router.da
 import 'package:referral_reconciliation/router/referral_reconciliation_router.gm.dart';
 import 'package:registration_delivery/router/registration_delivery_router.dart';
 import 'package:registration_delivery/router/registration_delivery_router.gm.dart';
+import 'package:complaints/router/complaints_router.dart';
+import 'package:complaints/router/complaints_router.gm.dart';
 
 import '../blocs/localization/app_localization.dart';
 import '../pages/acknowledgement.dart';
@@ -53,6 +55,7 @@ part 'app_router.gr.dart';
     ReferralReconciliationRoute,
     DigitScannerPackageRoute,
     RegistrationDeliveryRoute,
+    ComplaintsRoute,
   ],
 )
 class AppRouter extends _$AppRouter {

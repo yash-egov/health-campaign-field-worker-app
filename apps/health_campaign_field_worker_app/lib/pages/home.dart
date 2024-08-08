@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:attendance_management/attendance_management.dart';
 import 'package:attendance_management/router/attendance_router.gm.dart';
+import 'package:complaints/complaints.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
@@ -677,6 +678,12 @@ void setPackagesSingleton(BuildContext context) {
                 ..name = e.code
                 ..code = e.code)
               .toList(),
+        );
+
+        //complaints module singleton
+        ComplaintsSingleton().setInitialData(
+          tenantId: envConfig.variables.tenantId,
+          loggedInUserUuid: context.loggedInUserUuid
         );
       });
 }
